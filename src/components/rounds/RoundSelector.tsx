@@ -21,7 +21,7 @@ const RoundSelector: React.StatelessComponent<Props> = (props: Props) => {
   };
 
   return (
-    <select defaultValue={`${props.selectedRoundNumber}`} onChange={handleOnChange}>
+    <select value={`${props.selectedRoundNumber}`} onChange={handleOnChange}>
       {optionElements}
     </select>
   );
