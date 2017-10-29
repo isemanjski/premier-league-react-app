@@ -28,4 +28,14 @@ describe('season actions', () => {
     expect(actions.loadSeasonDataError(error)).toEqual(expectedAction);
   });
 
+  it('should create an action to select round', () => {
+    const roundNum = 1;
+    const expectedAction = {
+      type: types.SELECT_ROUND_IN_SEASON,
+      payload: roundNum
+    };
+    expect(actions.selectRoundInSeason(roundNum)).toEqual(expectedAction);
+  });
+
+
 });

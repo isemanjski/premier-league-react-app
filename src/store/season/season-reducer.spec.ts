@@ -1,4 +1,4 @@
-import { reducer } from './season-reducer';
+import { reducer, State as SeasonState } from './season-reducer';
 import * as types from './season-actions';
 import { Season } from '../../api/models/season.model';
 
@@ -32,8 +32,9 @@ const expectedModel: Season = {
 describe('season reducer', () => {
 
   it('should return the initial state', () => {
-    expect(reducer(undefined, {} as any)).toEqual({
+    expect(reducer(undefined, {} as any)).toEqual(<SeasonState> {
       season: new Season(),
+      selectedRoundNumber: null,
       isLoading: false,
       error: null
     });
@@ -41,10 +42,10 @@ describe('season reducer', () => {
 
   it('should handle LOAD_SEASON_DATA_START', () => {
     expect(
-      reducer({} as any, {
+      reducer({} as SeasonState, {
         type: types.LOAD_SEASON_DATA_START
       })
-    ).toEqual({
+    ).toEqual(<SeasonState> {
       isLoading: true,
       error: null
     });
@@ -52,25 +53,37 @@ describe('season reducer', () => {
 
   it('should handle LOAD_SEASON_DATA_SUCCESS', () => {
     expect(
-      reducer({} as any, {
+      reducer({} as SeasonState, {
         type: types.LOAD_SEASON_DATA_SUCCESS,
         payload: data
       })
-    ).toEqual({
+    ).toEqual(<SeasonState> {
       isLoading: false,
-      season: expectedModel
+      season: expectedModel,
+      selectedRoundNumber: 1
     });
   });
 
-  it('should handle LOAD_SEASON_DATA_ERRROR', () => {
+  it('should handle LOAD_SEASON_DATA_ERROR', () => {
     expect(
-      reducer({} as any, {
+      reducer({} as SeasonState, {
         type: types.LOAD_SEASON_DATA_ERROR,
         payload: 'Error message'
       })
-    ).toEqual({
+    ).toEqual(<SeasonState> {
       isLoading: false,
       error: 'Error message'
+    });
+  });
+
+  it('should handle SELECT_ROUND_IN_SEASON', () => {
+    expect(
+      reducer({} as SeasonState, {
+        type: types.SELECT_ROUND_IN_SEASON,
+        payload: 1
+      })
+    ).toEqual(<SeasonState> {
+      selectedRoundNumber: 1
     });
   });
 
