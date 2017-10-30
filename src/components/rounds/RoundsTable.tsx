@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Round } from '../../api/models/round.model';
+import { RoundMatches } from '../../api/models/round-matches.model';
 import { RootState } from '../../store/root-reducer';
 import { actionCreators } from '../../store/season';
 import RoundSelector from './RoundSelector';
-import RoundMatches from './RoundMatches';
+import RoundWithMatches from './RoundWithMatches';
 
 const mapStateToProps = (state: RootState) => ({
   matchesByRound: state.season.season.matchesByRound,
@@ -16,7 +16,7 @@ const mapDispatchToProps = (dispatch: Function) => ({
 });
 
 export interface Props {
-  matchesByRound: Round[];
+  matchesByRound: RoundMatches[];
   selectedRoundNumber: number;
   handleOnSelect: (round: number) => Function;
 }
@@ -33,7 +33,7 @@ const RoundsTable: React.StatelessComponent<Props> = (props: Props) => {
         selectedRoundNumber={props.selectedRoundNumber}
         onSelect={props.handleOnSelect}
       />
-      <RoundMatches
+      <RoundWithMatches
         round={props.selectedRoundNumber}
         matches={selectedRoundMatches}
       />

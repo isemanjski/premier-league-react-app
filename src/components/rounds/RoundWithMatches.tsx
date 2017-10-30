@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Match } from '../../api/models/match.model';
+import { Match } from '../../api/models';
 
 export interface Props {
   round: number;
   matches: Match[];
 }
 
-const RoundMatches: React.StatelessComponent<Props> = (props: Props) => {
+const RoundWithMatches: React.StatelessComponent<Props> = (props: Props) => {
   const { round, matches } = props;
 
   if (round === null) {
@@ -17,8 +17,8 @@ const RoundMatches: React.StatelessComponent<Props> = (props: Props) => {
     return (
       <li key={index} style={{ listStyle: 'none', marginBottom: '10px' }}>
         <div style={{ float: 'left', marginRight: '10px' }}>
-          <div>{match.homeTeamName}</div>
-          <div>{match.awayTeamName}</div>
+          <div>{match.homeTeam.name}</div>
+          <div>{match.awayTeam.name}</div>
         </div>
         <div>
           <div>{match.homeTeamGoals}</div>
@@ -36,4 +36,4 @@ const RoundMatches: React.StatelessComponent<Props> = (props: Props) => {
   );
 };
 
-export default RoundMatches;
+export default RoundWithMatches;

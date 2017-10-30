@@ -5,29 +5,15 @@ import { Season } from '../../api/models/season.model';
 // tslint:disable:no-any
 const data: any[] = [
   {
-    'round': 1,
-    'matches': [
+    round: 1,
+    matches: [
       {
-        'Team 1': 1,
+        'Team 1': 3,
         'Team 2': 1
       }
     ]
   }
 ];
-
-const expectedModel: Season = {
-  matchesByRound: [
-    {
-      'round': 1,
-      'matches': [{
-        homeTeamName: 'Team 1',
-        homeTeamGoals: 1,
-        awayTeamName: 'Team 2',
-        awayTeamGoals: 1
-      }]
-    }
-  ]
-};
 
 describe('season reducer', () => {
 
@@ -41,48 +27,50 @@ describe('season reducer', () => {
   });
 
   it('should handle LOAD_SEASON_DATA_START', () => {
-    expect(
-      reducer({} as SeasonState, {
-        type: types.LOAD_SEASON_DATA_START
-      })
-    ).toEqual(<SeasonState> {
+    const state = reducer({} as SeasonState, {
+      type: types.LOAD_SEASON_DATA_START
+    });
+
+    expect(state).toEqual(<SeasonState> {
       isLoading: true,
       error: null
     });
   });
 
   it('should handle LOAD_SEASON_DATA_SUCCESS', () => {
-    expect(
-      reducer({} as SeasonState, {
-        type: types.LOAD_SEASON_DATA_SUCCESS,
-        payload: data
-      })
-    ).toEqual(<SeasonState> {
-      isLoading: false,
-      season: expectedModel,
-      selectedRoundNumber: 1
+    const state = reducer({} as SeasonState, {
+      type: types.LOAD_SEASON_DATA_SUCCESS,
+      payload: data
     });
+
+    expect(state.isLoading).toEqual(false);
+    expect(state.selectedRoundNumber).toEqual(1);
+    expect(state.season.teams.length).toEqual(2);
+    expect(state.season.matchesByRound[0].matches[0].awayTeamGoals).toEqual(1);
+    expect(state.season.matchesByRound[0].matches[0].awayTeamPoints).toEqual(0);
+    expect(state.season.standingsByRound[0].standings[0].overall.played).toEqual(1);
+    expect(state.season.standingsByRound[0].standings[0].overall.goalsScored).toEqual(3);
   });
 
   it('should handle LOAD_SEASON_DATA_ERROR', () => {
-    expect(
-      reducer({} as SeasonState, {
-        type: types.LOAD_SEASON_DATA_ERROR,
-        payload: 'Error message'
-      })
-    ).toEqual(<SeasonState> {
+    const state = reducer({} as SeasonState, {
+      type: types.LOAD_SEASON_DATA_ERROR,
+      payload: 'Error message'
+    });
+
+    expect(state).toEqual(<SeasonState> {
       isLoading: false,
       error: 'Error message'
     });
   });
 
   it('should handle SELECT_ROUND_IN_SEASON', () => {
-    expect(
-      reducer({} as SeasonState, {
-        type: types.SELECT_ROUND_IN_SEASON,
-        payload: 1
-      })
-    ).toEqual(<SeasonState> {
+    const state = reducer({} as SeasonState, {
+      type: types.SELECT_ROUND_IN_SEASON,
+      payload: 1
+    });
+
+    expect(state).toEqual(<SeasonState> {
       selectedRoundNumber: 1
     });
   });
