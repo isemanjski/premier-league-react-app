@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { RoundMatches } from '../../api/models/round-matches.model';
 import { RootState } from '../../store/root-reducer';
 import { actionCreators } from '../../store/season';
-import RoundSelector from './RoundSelector';
-import RoundWithMatches from './RoundWithMatches';
+import { RoundStandings } from '../../api/models';
+import RoundSelector from '../rounds/RoundSelector';
+import StandingsTable from './StandingsTable';
 
 const mapStateToProps = (state: RootState) => ({
-  matchesByRound: state.season.season.matchesByRound,
+  standingsByRound: state.season.season.standingsByRound,
   roundNumbers: state.season.season.roundNumbers,
   selectedRoundNumber: state.season.selectedRoundNumber
 });
@@ -17,15 +17,15 @@ const mapDispatchToProps = (dispatch: Function) => ({
 });
 
 export interface Props {
-  matchesByRound: RoundMatches[];
+  standingsByRound: RoundStandings[];
   roundNumbers: number[];
   selectedRoundNumber: number;
   handleOnSelect: (round: number) => Function;
 }
 
-const RoundsTable: React.StatelessComponent<Props> = (props: Props) => {
-  const selectedRound = props.matchesByRound.find(round => round.round === props.selectedRoundNumber);
-  const selectedMatches = selectedRound && selectedRound.matches || [];
+const Standings: React.StatelessComponent<Props> = (props: Props) => {
+  const selectedRound = props.standingsByRound.find(round => round.round === props.selectedRoundNumber);
+  const selectedStandings = selectedRound && selectedRound.standings || [];
 
   return (
     <div>
@@ -34,12 +34,11 @@ const RoundsTable: React.StatelessComponent<Props> = (props: Props) => {
         selectedRoundNumber={props.selectedRoundNumber}
         onSelect={props.handleOnSelect}
       />
-      <RoundWithMatches
-        round={props.selectedRoundNumber}
-        matches={selectedMatches}
+      <StandingsTable
+        standings={selectedStandings}
       />
     </div>
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RoundsTable);
+export default connect(mapStateToProps, mapDispatchToProps)(Standings);

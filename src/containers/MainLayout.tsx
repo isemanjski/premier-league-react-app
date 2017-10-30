@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Season } from '../api/models/season.model';
+import { Season } from '../api/models';
 import { fetchSeasonData } from '../api/api';
 import { RootState } from '../store/root-reducer';
 import RoundsTable from '../components/rounds/RoundsTable';
+import Standings from '../components/standings/Standings';
 
 /**
  * Maps Redux store updates to component props.
@@ -40,16 +41,21 @@ class MainLayout extends React.Component<Props> {
   render() {
     const { season, error } = this.props;
 
-    const matchesDefined = season && season.matchesByRound.length > 0;
-    let matchesTable = null;
-    if (matchesDefined) {
-      matchesTable = <RoundsTable/>;
+    const isDataDefined = season && season.matchesByRound.length > 0;
+    let resultingLayout = null;
+    if (isDataDefined) {
+      resultingLayout = (
+        <div>
+          <Standings/>
+          <RoundsTable/>
+        </div>
+      );
     }
 
     return (
       <div className="App">
         <div className="App-header"/>
-        {error ? error : matchesDefined ? matchesTable : 'Loading...'}
+        {error ? error : isDataDefined ? resultingLayout : 'Loading...'}
       </div>
     );
   }

@@ -1,13 +1,9 @@
+import { StatisticsType } from '../../constants/statistics-type.enum';
 import { Match, RoundMatches, RoundStandings, Season, Standing, Statistics, Team } from '../models';
+import { POINTS_FOR_DRAW, POINTS_FOR_LOSING, POINTS_FOR_WINNING } from '../../constants/constants';
 
-const STATS_OVERALL = 'overall';
-const STATS_HOME = 'home';
-const STATS_AWAY = 'away';
 const SIDE_HOME = 'home';
 const SIDE_AWAY = 'away';
-const POINTS_FOR_WINNING = 3;
-const POINTS_FOR_LOSING = 0;
-const POINTS_FOR_DRAW = 1;
 
 // tslint:disable:no-any
 /**
@@ -34,6 +30,7 @@ const POINTS_FOR_DRAW = 1;
  */
 export const mapSeasonDataToModel = (data: any): Season => {
   let teams: Team[] = [];
+  const roundNumbers: number[] = [];
   const matchesByRound: RoundMatches[] = [];
   const standingsByRound: RoundStandings[] = [];
 
@@ -41,6 +38,7 @@ export const mapSeasonDataToModel = (data: any): Season => {
     data.forEach((roundData: any, index: number) => {
       // Resolve round number
       const round: number = Number(roundData.round);
+      roundNumbers.push(round);
 
       // Resolve all teams from 1st round (under assumption that all teams participate in each round)
       if (index === 0) {
@@ -67,12 +65,12 @@ export const mapSeasonDataToModel = (data: any): Season => {
       });
 
       // Sort standings by total points
-      roundStandings.standings.sort(positionSorter(STATS_OVERALL));
+      roundStandings.standings.sort(positionSorter(StatisticsType.Overall));
       // Update position of each team using index inside sorted array
       roundStandings.standings.forEach((s: Standing, i: number) => s.position = i + 1);
 
       // Calculate home position by copying standings array and sorting it by home points
-      const standingsSortedByHomePoints = roundStandings.standings.slice().sort(positionSorter(STATS_HOME));
+      const standingsSortedByHomePoints = roundStandings.standings.slice().sort(positionSorter(StatisticsType.Home));
       // Update home position of each team using index inside sorted array
       standingsSortedByHomePoints.forEach((s: Standing, i: number) => {
         const teamStanding = findStandingForTeam(s.team, roundStandings.standings);
@@ -82,7 +80,7 @@ export const mapSeasonDataToModel = (data: any): Season => {
       });
 
       // Calculate away position by copying standings array and sorting it by away points
-      const standingsSortedByAwayPoints = roundStandings.standings.slice().sort(positionSorter(STATS_AWAY));
+      const standingsSortedByAwayPoints = roundStandings.standings.slice().sort(positionSorter(StatisticsType.Away));
       // Update away position of each team using index inside sorted array
       standingsSortedByAwayPoints.forEach((s: Standing, i: number) => {
         const teamStanding = findStandingForTeam(s.team, roundStandings.standings);
@@ -95,7 +93,7 @@ export const mapSeasonDataToModel = (data: any): Season => {
     });
   }
 
-  return new Season({ teams, matchesByRound, standingsByRound });
+  return new Season({ teams, roundNumbers, matchesByRound, standingsByRound });
 };
 
 /**
