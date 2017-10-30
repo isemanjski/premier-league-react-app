@@ -6,7 +6,7 @@ import {
   mapSeasonDataToModel,
   resolveTeamsFromRoundData
 } from './season-model-mapper';
-import { Match, RoundStandings, Standing, Statistics, Team } from '../models';
+import { Match, RoundStandings, Standing, StandingByType, Team } from '../models';
 
 // tslint:disable:no-any
 const data: any[] = [
@@ -135,10 +135,11 @@ describe('calculateStandingsFromMatch', () => {
   const lastRoundStandings: Standing[] = [
     <Standing> {
       team: team1,
-      position: 2,
+      overallPosition: 2,
       homePosition: 1,
       awayPosition: 3,
       overall: {
+        position: 2,
         played: 3,
         won: 2,
         drawn: 1,
@@ -148,15 +149,16 @@ describe('calculateStandingsFromMatch', () => {
         goalDifference: 8,
         points: 32
       },
-      home: new Statistics(),
-      away: new Statistics()
+      home: new StandingByType(),
+      away: new StandingByType()
     },
     <Standing> {
       team: team2,
-      position: 5,
+      overallPosition: 5,
       homePosition: 2,
       awayPosition: 1,
       overall: {
+        position: 5,
         played: 3,
         won: 0,
         drawn: 1,
@@ -166,202 +168,23 @@ describe('calculateStandingsFromMatch', () => {
         goalDifference: -2,
         points: 1
       },
-      home: new Statistics(),
-      away: new Statistics()
+      home: new StandingByType(),
+      away: new StandingByType()
     }
   ];
 
   it('should calculate correct standings from match and previous standing', () => {
     calculateStandingsFromMatch(match, roundStandings, lastRoundStandings);
-    expect(roundStandings.standings).toEqual([{
-      away: {
-        drawn: 0,
-        goalDifference: 0,
-        goalsConceded: 0,
-        goalsScored: 0,
-        lost: 0,
-        played: 0,
-        points: 0,
-        won: 0
-      },
-      awayPosition: null,
-      home: {
-        drawn: 0,
-        goalDifference: 1,
-        goalsConceded: 1,
-        goalsScored: 2,
-        lost: 0,
-        played: 1,
-        points: 3,
-        won: 1
-      },
-      homePosition: null,
-      overall: {
-        drawn: 1,
-        goalDifference: -1,
-        goalsConceded: 7,
-        goalsScored: 6,
-        lost: 2,
-        played: 4,
-        points: 4,
-        won: 1
-      },
-      playedMatches: [{
-        awayTeam: {
-          id: 'team-1',
-          name: 'Team 1'
-        },
-        awayTeamGoals: 1,
-        awayTeamPoints: 0,
-        homeTeam: {
-          id: 'team-2',
-          name: 'Team 2'
-        },
-        homeTeamGoals: 2,
-        homeTeamPoints: 3
-      }],
-      position: null,
-      prevAwayPosition: 1,
-      prevHomePosition: 2,
-      prevPosition: 5,
-      prevStanding: {
-        away: {
-          drawn: 0,
-          goalDifference: 0,
-          goalsConceded: 0,
-          goalsScored: 0,
-          lost: 0,
-          played: 0,
-          points: 0,
-          won: 0
-        },
-        awayPosition: 1,
-        home: {
-          drawn: 0,
-          goalDifference: 0,
-          goalsConceded: 0,
-          goalsScored: 0,
-          lost: 0,
-          played: 0,
-          points: 0,
-          won: 0
-        },
-        homePosition: 2,
-        overall: {
-          drawn: 1,
-          goalDifference: -2,
-          goalsConceded: 6,
-          goalsScored: 4,
-          lost: 2,
-          played: 3,
-          points: 1,
-          won: 0
-        },
-        position: 5,
-        team: {
-          id: 'team-2',
-          name: 'Team 2'
-        }
-      },
-      team: {
-        id: 'team-2',
-        name: 'Team 2'
-      }
-    }, {
-      away: {
-        drawn: 0,
-        goalDifference: -1,
-        goalsConceded: 2,
-        goalsScored: 1,
-        lost: 1,
-        played: 1,
-        points: 0,
-        won: 0
-      },
-      awayPosition: null,
-      home: {
-        drawn: 0,
-        goalDifference: 0,
-        goalsConceded: 0,
-        goalsScored: 0,
-        lost: 0,
-        played: 0,
-        points: 0,
-        won: 0
-      },
-      homePosition: null,
-      overall: {
-        drawn: 1,
-        goalDifference: 7,
-        goalsConceded: 4,
-        goalsScored: 11,
-        lost: 1,
-        played: 4,
-        points: 32,
-        won: 2
-      },
-      playedMatches: [{
-        awayTeam: {
-          id: 'team-1',
-          name: 'Team 1'
-        },
-        awayTeamGoals: 1,
-        awayTeamPoints: 0,
-        homeTeam: {
-          id: 'team-2',
-          name: 'Team 2'
-        },
-        homeTeamGoals: 2,
-        homeTeamPoints: 3
-      }],
-      position: null,
-      prevAwayPosition: 3,
-      prevHomePosition: 1,
-      prevPosition: 2,
-      prevStanding: {
-        away: {
-          drawn: 0,
-          goalDifference: 0,
-          goalsConceded: 0,
-          goalsScored: 0,
-          lost: 0,
-          played: 0,
-          points: 0,
-          won: 0
-        },
-        awayPosition: 3,
-        home: {
-          drawn: 0,
-          goalDifference: 0,
-          goalsConceded: 0,
-          goalsScored: 0,
-          lost: 0,
-          played: 0,
-          points: 0,
-          won: 0
-        },
-        homePosition: 1,
-        overall: {
-          drawn: 1,
-          goalDifference: 8,
-          goalsConceded: 2,
-          goalsScored: 10,
-          lost: 0,
-          played: 3,
-          points: 32,
-          won: 2
-        },
-        position: 2,
-        team: {
-          id: 'team-1',
-          name: 'Team 1'
-        }
-      },
-      team: {
-        id: 'team-1',
-        name: 'Team 1'
-      }
-    }]);
+    expect(roundStandings.standings.length).toEqual(2);
+    expect(roundStandings.standings[0].team.id).toEqual(team2.id);
+    expect(roundStandings.standings[0].overall.won).toEqual(1);
+    expect(roundStandings.standings[0].overall.drawn).toEqual(1);
+    expect(roundStandings.standings[0].overall.lost).toEqual(2);
+    expect(roundStandings.standings[0].overall.goalsScored).toEqual(6);
+    expect(roundStandings.standings[0].overall.goalsConceded).toEqual(7);
+    expect(roundStandings.standings[0].overall.goalDifference).toEqual(-1);
+    expect(roundStandings.standings[0].playedMatches[0].awayTeamGoals).toEqual(1);
+    expect(roundStandings.standings[0].playedMatches[0].homeTeamGoals).toEqual(2);
   });
 
 });

@@ -13,14 +13,14 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  handleOnSelect: (round: number) => dispatch(actionCreators.selectRoundInSeason(round))
+  handleRoundSelect: (round: number) => dispatch(actionCreators.selectRoundInSeason(round))
 });
 
 export interface Props {
   matchesByRound: RoundMatches[];
   roundNumbers: number[];
   selectedRoundNumber: number;
-  handleOnSelect: (round: number) => Function;
+  handleRoundSelect: (round: number) => Function;
 }
 
 const RoundsTable: React.StatelessComponent<Props> = (props: Props) => {
@@ -32,7 +32,7 @@ const RoundsTable: React.StatelessComponent<Props> = (props: Props) => {
       <RoundSelector
         roundNumbers={props.roundNumbers}
         selectedRoundNumber={props.selectedRoundNumber}
-        onSelect={props.handleOnSelect}
+        onSelect={props.handleRoundSelect}
       />
       <RoundWithMatches
         round={props.selectedRoundNumber}

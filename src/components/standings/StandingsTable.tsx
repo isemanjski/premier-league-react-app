@@ -1,20 +1,24 @@
 import * as React from 'react';
 import { Standing } from '../../api/models';
-import { StatisticsType } from '../../constants/statistics-type.enum';
+import { StandingType } from '../../constants/standing-type.enum';
 import StandingRow from './StandingRow';
 
 interface Props {
   standings: Standing[];
+  standingType: StandingType;
 }
 
 const StandingsTable: React.StatelessComponent<Props> = (props: Props) => {
-  const tableRows: JSX.Element[] = [];
+  const { standings, standingType } = props;
 
-  props.standings.forEach(standing => {
-    tableRows.push(
-      <StandingRow key={standing.position} standing={standing} statisticsType={StatisticsType.Overall}/>
-    );
+  // Sort standings array with number of points in selected standings type ('overall', 'home' or 'away') - descending
+  const sortedStandings = standings.slice().sort((s1: Standing, s2: Standing) => {
+    return (s2[standingType].points - s1[standingType].points);
   });
+
+  const tableRows = sortedStandings.map(standing => (
+    <StandingRow key={standing[standingType].position} standing={standing} standingType={standingType}/>
+  ));
 
   return (
     <table>

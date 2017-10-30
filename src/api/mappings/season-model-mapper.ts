@@ -1,5 +1,5 @@
-import { StatisticsType } from '../../constants/statistics-type.enum';
-import { Match, RoundMatches, RoundStandings, Season, Standing, Statistics, Team } from '../models';
+import { StandingType } from '../../constants/standing-type.enum';
+import { Match, RoundMatches, RoundStandings, Season, Standing, StandingByType, Team } from '../models';
 import { POINTS_FOR_DRAW, POINTS_FOR_LOSING, POINTS_FOR_WINNING } from '../../constants/constants';
 
 const SIDE_HOME = 'home';
@@ -65,27 +65,32 @@ export const mapSeasonDataToModel = (data: any): Season => {
       });
 
       // Sort standings by total points
-      roundStandings.standings.sort(positionSorter(StatisticsType.Overall));
+      roundStandings.standings.sort(positionSorter(StandingType.Overall));
       // Update position of each team using index inside sorted array
-      roundStandings.standings.forEach((s: Standing, i: number) => s.position = i + 1);
+      roundStandings.standings.forEach((s: Standing, i: number) => {
+        s.overallPosition = i + 1;
+        s[StandingType.Overall].position = i + 1;
+      });
 
       // Calculate home position by copying standings array and sorting it by home points
-      const standingsSortedByHomePoints = roundStandings.standings.slice().sort(positionSorter(StatisticsType.Home));
+      const standingsSortedByHomePoints = roundStandings.standings.slice().sort(positionSorter(StandingType.Home));
       // Update home position of each team using index inside sorted array
       standingsSortedByHomePoints.forEach((s: Standing, i: number) => {
         const teamStanding = findStandingForTeam(s.team, roundStandings.standings);
         if (teamStanding) {
           teamStanding.homePosition = i + 1;
+          teamStanding[StandingType.Home].position = i + 1;
         }
       });
 
       // Calculate away position by copying standings array and sorting it by away points
-      const standingsSortedByAwayPoints = roundStandings.standings.slice().sort(positionSorter(StatisticsType.Away));
+      const standingsSortedByAwayPoints = roundStandings.standings.slice().sort(positionSorter(StandingType.Away));
       // Update away position of each team using index inside sorted array
       standingsSortedByAwayPoints.forEach((s: Standing, i: number) => {
         const teamStanding = findStandingForTeam(s.team, roundStandings.standings);
         if (teamStanding) {
           teamStanding.awayPosition = i + 1;
+          teamStanding[StandingType.Away].position = i + 1;
         }
       });
 
@@ -244,7 +249,7 @@ export const calculateStanding = (team: Team,
 
   const standing = new Standing({ team });
   standing.prevStanding = previousStanding || new Standing();
-  standing.prevPosition = standing.prevStanding.position;
+  standing.prevOverallPosition = standing.prevStanding.prevOverallPosition;
   standing.prevHomePosition = standing.prevStanding.homePosition;
   standing.prevAwayPosition = standing.prevStanding.awayPosition;
 
@@ -253,7 +258,7 @@ export const calculateStanding = (team: Team,
   const points = calculatePoints(goalsScored, goalsReceived);
 
   const prevOverall = standing.prevStanding.overall;
-  standing.overall = new Statistics({
+  standing.overall = new StandingByType({
     played: prevOverall.played + 1,
     won: prevOverall.won + (points === POINTS_FOR_WINNING ? 1 : 0),
     drawn: prevOverall.drawn + (points === POINTS_FOR_DRAW ? 1 : 0),
@@ -264,16 +269,16 @@ export const calculateStanding = (team: Team,
     points: prevOverall.points + points
   });
 
-  const prevStatistics = standing.prevStanding[`${matchSide}`];
-  standing[`${matchSide}`] = new Statistics({
-    played: prevStatistics.played + 1,
-    won: prevStatistics.won + (points === POINTS_FOR_WINNING ? 1 : 0),
-    drawn: prevStatistics.drawn + (points === POINTS_FOR_DRAW ? 1 : 0),
-    lost: prevStatistics.lost + (points === POINTS_FOR_LOSING ? 1 : 0),
-    goalsScored: prevStatistics.goalsScored + goalsScored,
-    goalsConceded: prevStatistics.goalsConceded + goalsReceived,
-    goalDifference: prevStatistics.goalDifference + goalsScored - goalsReceived,
-    points: prevStatistics.points + points
+  const prevStandingByType = standing.prevStanding[`${matchSide}`];
+  standing[`${matchSide}`] = new StandingByType({
+    played: prevStandingByType.played + 1,
+    won: prevStandingByType.won + (points === POINTS_FOR_WINNING ? 1 : 0),
+    drawn: prevStandingByType.drawn + (points === POINTS_FOR_DRAW ? 1 : 0),
+    lost: prevStandingByType.lost + (points === POINTS_FOR_LOSING ? 1 : 0),
+    goalsScored: prevStandingByType.goalsScored + goalsScored,
+    goalsConceded: prevStandingByType.goalsConceded + goalsReceived,
+    goalDifference: prevStandingByType.goalDifference + goalsScored - goalsReceived,
+    points: prevStandingByType.points + points
   });
 
   standing[`${matchOtherSide}`] = { ...standing.prevStanding[`${matchOtherSide}`] };

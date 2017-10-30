@@ -5,6 +5,8 @@ import { actionCreators } from '../../store/season';
 import { RoundStandings } from '../../api/models';
 import RoundSelector from '../rounds/RoundSelector';
 import StandingsTable from './StandingsTable';
+import StandingsTypeSelector from './StandingTypeSelector';
+import { StandingType } from '../../constants/standing-type.enum';
 
 const mapStateToProps = (state: RootState) => ({
   standingsByRound: state.season.season.standingsByRound,
@@ -13,32 +15,55 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  handleOnSelect: (round: number) => dispatch(actionCreators.selectRoundInSeason(round))
+  handleRoundSelect: (round: number) => dispatch(actionCreators.selectRoundInSeason(round))
 });
 
 export interface Props {
   standingsByRound: RoundStandings[];
   roundNumbers: number[];
   selectedRoundNumber: number;
-  handleOnSelect: (round: number) => Function;
+  handleRoundSelect: (round: number) => Function;
 }
 
-const Standings: React.StatelessComponent<Props> = (props: Props) => {
-  const selectedRound = props.standingsByRound.find(round => round.round === props.selectedRoundNumber);
-  const selectedStandings = selectedRound && selectedRound.standings || [];
+export interface State {
+  selectedStandingType: StandingType;
+}
 
-  return (
-    <div>
-      <RoundSelector
-        roundNumbers={props.roundNumbers}
-        selectedRoundNumber={props.selectedRoundNumber}
-        onSelect={props.handleOnSelect}
-      />
-      <StandingsTable
-        standings={selectedStandings}
-      />
-    </div>
-  );
-};
+class Standings extends React.Component<Props, State> {
+
+  state = {
+    selectedStandingType: StandingType.Overall
+  };
+
+  handleStandingTypeSelect = (standingType: StandingType): void => {
+    this.setState({
+      selectedStandingType: standingType
+    });
+  }
+
+  render() {
+    const selectedRound = this.props.standingsByRound.find(round => round.round === this.props.selectedRoundNumber);
+    const selectedStandings = selectedRound && selectedRound.standings || [];
+
+    return (
+      <div>
+        <RoundSelector
+          roundNumbers={this.props.roundNumbers}
+          selectedRoundNumber={this.props.selectedRoundNumber}
+          onSelect={this.props.handleRoundSelect}
+        />
+        <StandingsTypeSelector
+          selectedStandingType={this.state.selectedStandingType}
+          onSelect={this.handleStandingTypeSelect}
+        />
+        <StandingsTable
+          standings={selectedStandings}
+          standingType={this.state.selectedStandingType}
+        />
+      </div>
+    );
+  }
+
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Standings);

@@ -1,30 +1,30 @@
 import * as React from 'react';
-import { Standing, Statistics } from '../../api/models';
-import { StatisticsType } from '../../constants/statistics-type.enum';
+import { Standing, StandingByType } from '../../api/models';
+import { StandingType } from '../../constants/standing-type.enum';
 import StandingForm from './TeamForm';
 
 interface Props {
   standing: Standing;
-  statisticsType: StatisticsType;
+  standingType: StandingType;
 }
 
 const StandingRow: React.StatelessComponent<Props> = (props: Props) => {
-  const { standing, statisticsType } = props;
-  const statistics = standing[statisticsType] as Statistics;
+  const { standing, standingType } = props;
+  const standingByType = standing[standingType] as StandingByType;
 
   return (
     <tr>
-      <td>{standing.position}</td>
+      <td>{standingByType.position}</td>
       <td>{standing.team.name}</td>
-      <td>{statistics.played}</td>
-      <td>{statistics.won}</td>
-      <td>{statistics.drawn}</td>
-      <td>{statistics.lost}</td>
-      <td>{statistics.goalsScored}</td>
-      <td>{statistics.goalsConceded}</td>
-      <td>{statistics.goalDifference}</td>
-      <td><StandingForm standing={standing}/></td>
-      <td>{statistics.points}</td>
+      <td>{standingByType.played}</td>
+      <td>{standingByType.won}</td>
+      <td>{standingByType.drawn}</td>
+      <td>{standingByType.lost}</td>
+      <td>{standingByType.goalsScored}</td>
+      <td>{standingByType.goalsConceded}</td>
+      <td>{standingByType.goalDifference}</td>
+      <td><StandingForm standing={standing} standingType={standingType}/></td>
+      <td>{standingByType.points}</td>
     </tr>
   );
 };

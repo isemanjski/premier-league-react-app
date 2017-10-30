@@ -1,7 +1,8 @@
 // tslint:disable:no-any
 import { isNotNil } from '../../utils/helpers';
 
-export class Statistics {
+export class StandingByType {
+  position: number;
   played: number;
   won: number;
   drawn: number;
@@ -12,6 +13,7 @@ export class Statistics {
   points: number;
 
   constructor(props: any = {}) {
+    this.position = isNotNil(props.position) ? props.position : 0;
     this.played = isNotNil(props.played) ? props.played : 0;
     this.won = isNotNil(props.won) ? props.won : 0;
     this.drawn = isNotNil(props.drawn) ? props.drawn : 0;
