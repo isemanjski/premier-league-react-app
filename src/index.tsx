@@ -5,7 +5,11 @@ import registerServiceWorker from './registerServiceWorker';
 import { store } from './store';
 import App from './containers/App';
 
-import './index.css';
+// Import Semantic UI CSS
+import 'semantic-ui-css/semantic.min.css';
+
+// Import own styles
+import './assets/styles/main.css';
 
 ReactDOM.render(
   <Provider store={store}>
