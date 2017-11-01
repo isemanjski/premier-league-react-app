@@ -68,7 +68,6 @@ export const mapSeasonDataToModel = (data: any): Season => {
       roundStandings.standings.sort(positionSorter(StandingType.Overall));
       // Update position of each team using index inside sorted array
       roundStandings.standings.forEach((s: Standing, i: number) => {
-        s.overallPosition = i + 1;
         s[StandingType.Overall].position = i + 1;
       });
 
@@ -76,10 +75,9 @@ export const mapSeasonDataToModel = (data: any): Season => {
       const standingsSortedByHomePoints = roundStandings.standings.slice().sort(positionSorter(StandingType.Home));
       // Update home position of each team using index inside sorted array
       standingsSortedByHomePoints.forEach((s: Standing, i: number) => {
-        const teamStanding = findStandingForTeam(s.team, roundStandings.standings);
-        if (teamStanding) {
-          teamStanding.homePosition = i + 1;
-          teamStanding[StandingType.Home].position = i + 1;
+        const ts = findStandingForTeam(s.team, roundStandings.standings);
+        if (ts) {
+          ts[StandingType.Home].position = i + 1;
         }
       });
 
@@ -87,10 +85,9 @@ export const mapSeasonDataToModel = (data: any): Season => {
       const standingsSortedByAwayPoints = roundStandings.standings.slice().sort(positionSorter(StandingType.Away));
       // Update away position of each team using index inside sorted array
       standingsSortedByAwayPoints.forEach((s: Standing, i: number) => {
-        const teamStanding = findStandingForTeam(s.team, roundStandings.standings);
-        if (teamStanding) {
-          teamStanding.awayPosition = i + 1;
-          teamStanding[StandingType.Away].position = i + 1;
+        const ts = findStandingForTeam(s.team, roundStandings.standings);
+        if (ts) {
+          ts[StandingType.Away].position = i + 1;
         }
       });
 

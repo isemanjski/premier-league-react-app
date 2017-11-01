@@ -135,9 +135,6 @@ describe('calculateStandingsFromMatch', () => {
   const lastRoundStandings: Standing[] = [
     <Standing> {
       team: team1,
-      overallPosition: 2,
-      homePosition: 1,
-      awayPosition: 3,
       overall: {
         position: 2,
         played: 3,
@@ -154,9 +151,6 @@ describe('calculateStandingsFromMatch', () => {
     },
     <Standing> {
       team: team2,
-      overallPosition: 5,
-      homePosition: 2,
-      awayPosition: 1,
       overall: {
         position: 5,
         played: 3,
