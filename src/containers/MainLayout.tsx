@@ -4,8 +4,8 @@ import { Container, Dimmer, Loader, Message } from 'semantic-ui-react';
 import { Season } from '../api/models';
 import { fetchSeasonData } from '../api/api';
 import { RootState } from '../store/root-reducer';
-import RoundsTable from '../components/rounds/RoundsTable';
-import Standings from '../components/standings/Standings';
+import Header from '../components/header/Header';
+import Navigation from '../components/navigation/Navigation';
 
 /**
  * Maps Redux store updates to component props.
@@ -30,9 +30,10 @@ interface Props {
   isLoading: boolean;
   error: string | null;
   fetchSeasonData: () => void;
+  children?: React.ReactNode;
 }
 
-class MainContainer extends React.Component<Props> {
+class MainLayout extends React.Component<Props> {
 
   componentDidMount() {
     // Call api to fetch season data
@@ -47,31 +48,35 @@ class MainContainer extends React.Component<Props> {
     if (isDataDefined) {
       content = (
         <div>
-          <Standings/>
-          <RoundsTable/>
+          {this.props.children}
         </div>
       );
     }
 
     return (
-      <div className="pl-main-container">
-        <Container className="pl-main-container-content">
-          <Message hidden={!error} negative={true} icon={true}>
-            <Message.Content>
-              <Message.Header>Error</Message.Header>
-              {error}
-            </Message.Content>
-          </Message>
+      <div>
+        <Header/>
+        <Navigation/>
 
-          <Dimmer active={isLoading} inverted={true}>
-            <Loader active={isLoading}>Loading</Loader>
-          </Dimmer>
+        <div className="pl-main-container">
+          <Container className="pl-main-container-content">
+            <Message hidden={!error} negative={true} icon={true}>
+              <Message.Content>
+                <Message.Header>Error</Message.Header>
+                {error}
+              </Message.Content>
+            </Message>
 
-          {content}
-        </Container>
+            <Dimmer active={isLoading} inverted={true}>
+              <Loader active={isLoading}>Loading</Loader>
+            </Dimmer>
+
+            {content}
+          </Container>
+        </div>
       </div>
     );
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(MainLayout);
