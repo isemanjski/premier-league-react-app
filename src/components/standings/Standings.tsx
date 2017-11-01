@@ -2,7 +2,6 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Form } from 'semantic-ui-react';
 import { RootState } from '../../store/root-reducer';
-import { actionCreators } from '../../store/season';
 import { RoundStandings } from '../../api/models';
 import RoundSelector from '../rounds/RoundSelector';
 import StandingsTable from './StandingsTable';
@@ -11,13 +10,9 @@ import { StandingType } from '../../constants/standing-type.enum';
 import SeasonSelector from './SeasonSelector';
 
 const mapStateToProps = (state: RootState) => ({
-  standingsByRound: state.season.season.standingsByRound,
-  roundNumbers: state.season.season.roundNumbers,
-  selectedRoundNumber: state.season.selectedRoundNumber
-});
-
-const mapDispatchToProps = (dispatch: Function) => ({
-  handleRoundSelect: (round: number) => dispatch(actionCreators.selectRoundInSeason(round))
+  standingsByRound: state.seasonState.season.standingsByRound,
+  roundNumbers: state.seasonState.season.roundNumbers,
+  selectedRoundNumber: state.seasonState.selectedRoundNumber
 });
 
 export interface Props {
@@ -28,45 +23,60 @@ export interface Props {
 }
 
 export interface State {
+  selectedRoundNumber: number;
   selectedStandingType: StandingType;
 }
 
 class Standings extends React.Component<Props, State> {
 
-  state = {
-    selectedStandingType: StandingType.Overall
-  };
+  constructor(props: Props) {
+    super(props);
 
-  handleStandingTypeSelect = (standingType: StandingType): void => {
+    this.state = {
+      selectedRoundNumber: props.selectedRoundNumber,
+      selectedStandingType: StandingType.Overall
+    };
+  }
+
+  handleRoundNumberChange = (roundNumber: number): void => {
+    this.setState({
+      selectedRoundNumber: roundNumber
+    });
+  }
+
+  handleStandingTypeChange = (standingType: StandingType): void => {
     this.setState({
       selectedStandingType: standingType
     });
   }
 
   render() {
-    const selectedRound = this.props.standingsByRound.find(round => round.round === this.props.selectedRoundNumber);
+    const { standingsByRound, roundNumbers } = this.props;
+    const { selectedRoundNumber, selectedStandingType } = this.state;
+
+    const selectedRound = standingsByRound.find(round => round.round === selectedRoundNumber);
     const selectedStandings = selectedRound && selectedRound.standings || [];
 
     return (
       <div>
         <Form>
           <Form.Group widths="equal">
-            <SeasonSelector />
+            <SeasonSelector/>
             <RoundSelector
-              roundNumbers={this.props.roundNumbers}
-              selectedRoundNumber={this.props.selectedRoundNumber}
-              onSelect={this.props.handleRoundSelect}
+              roundNumbers={roundNumbers}
+              selectedRoundNumber={selectedRoundNumber}
+              onChange={this.handleRoundNumberChange}
             />
             <StandingsTypeSelector
-              selectedStandingType={this.state.selectedStandingType}
-              onSelect={this.handleStandingTypeSelect}
+              selectedStandingType={selectedStandingType}
+              onChange={this.handleStandingTypeChange}
             />
           </Form.Group>
         </Form>
 
         <StandingsTable
           standings={selectedStandings}
-          standingType={this.state.selectedStandingType}
+          standingType={selectedStandingType}
         />
       </div>
     );
@@ -74,4 +84,4 @@ class Standings extends React.Component<Props, State> {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Standings);
+export default connect(mapStateToProps)(Standings);

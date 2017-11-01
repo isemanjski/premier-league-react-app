@@ -3,19 +3,14 @@ import { connect } from 'react-redux';
 import { Form } from 'semantic-ui-react';
 import { RoundMatches } from '../../api/models';
 import { RootState } from '../../store/root-reducer';
-import { actionCreators } from '../../store/season';
 import RoundSelector from './RoundSelector';
 import ResultsList from './ResultsTable';
 import SeasonSelector from '../standings/SeasonSelector';
 
 const mapStateToProps = (state: RootState) => ({
-  matchesByRound: state.season.season.matchesByRound,
-  roundNumbers: state.season.season.roundNumbers,
-  selectedRoundNumber: state.season.selectedRoundNumber
-});
-
-const mapDispatchToProps = (dispatch: Function) => ({
-  handleRoundSelect: (round: number) => dispatch(actionCreators.selectRoundInSeason(round))
+  matchesByRound: state.seasonState.season.matchesByRound,
+  roundNumbers: state.seasonState.season.roundNumbers,
+  selectedRoundNumber: state.seasonState.selectedRoundNumber
 });
 
 export interface Props {
@@ -25,29 +20,53 @@ export interface Props {
   handleRoundSelect: (round: number) => Function;
 }
 
-const Results: React.StatelessComponent<Props> = (props: Props) => {
-  const selectedRound = props.matchesByRound.find(round => round.round === props.selectedRoundNumber);
-  const selectedMatches = selectedRound && selectedRound.matches || [];
+export interface State {
+  selectedRoundNumber: number;
+}
 
-  return (
-    <div>
-      <Form className="pl-results-filter">
-        <Form.Group widths="equal">
-          <SeasonSelector/>
-          <RoundSelector
-            roundNumbers={props.roundNumbers}
-            selectedRoundNumber={props.selectedRoundNumber}
-            onSelect={props.handleRoundSelect}
-          />
-        </Form.Group>
-      </Form>
+class Results extends React.Component<Props, State> {
 
-      <ResultsList
-        round={props.selectedRoundNumber}
-        matches={selectedMatches}
-      />
-    </div>
-  );
-};
+  constructor(props: Props) {
+    super(props);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Results);
+    this.state = {
+      selectedRoundNumber: props.selectedRoundNumber
+    };
+  }
+
+  handleRoundNumberChange = (roundNumber: number): void => {
+    this.setState({
+      selectedRoundNumber: roundNumber
+    });
+  }
+
+  render() {
+    const { matchesByRound, roundNumbers } = this.props;
+    const { selectedRoundNumber } = this.state;
+
+    const selectedRound = matchesByRound.find(round => round.round === selectedRoundNumber);
+    const selectedMatches = selectedRound && selectedRound.matches || [];
+
+    return (
+      <div>
+        <Form className="pl-results-filter">
+          <Form.Group widths="equal">
+            <SeasonSelector/>
+            <RoundSelector
+              roundNumbers={roundNumbers}
+              selectedRoundNumber={selectedRoundNumber}
+              onChange={this.handleRoundNumberChange}
+            />
+          </Form.Group>
+        </Form>
+
+        <ResultsList
+          round={selectedRoundNumber}
+          matches={selectedMatches}
+        />
+      </div>
+    );
+  }
+}
+
+export default connect(mapStateToProps)(Results);

@@ -1,38 +1,55 @@
+// tslint:disable:no-any
+
 import * as React from 'react';
 import { SyntheticEvent } from 'react';
-import { DropdownProps, Form } from 'semantic-ui-react';
+import { Form, SelectProps } from 'semantic-ui-react';
 import { StandingType } from '../../constants/standing-type.enum';
 
 interface Props {
   selectedStandingType: StandingType;
-  onSelect: Function;
+  onChange: Function;
+}
+
+interface State {
+  selectOptions: any[];
 }
 
 const standingTypes = [StandingType.Overall, StandingType.Home, StandingType.Away];
 
-const StandingTypeSelector: React.StatelessComponent<Props> = (props: Props) => {
-  const selectOptions = standingTypes.map(standingType => {
-    return ({
-      key: standingType,
-      text: standingType.charAt(0).toUpperCase() + standingType.slice(1),
-      value: standingType
+class StandingTypeSelector extends React.Component<Props, State> {
+
+  constructor(props: Props) {
+    super(props);
+
+    const selectOptions = standingTypes.map(standingType => {
+      return ({
+        key: standingType,
+        text: standingType.charAt(0).toUpperCase() + standingType.slice(1),
+        value: standingType
+      });
     });
-  });
 
-  const handleChange = (event: SyntheticEvent<HTMLSelectElement>, data: DropdownProps) => {
-    props.onSelect(data.value as StandingType);
-  };
+    this.state = {
+      selectOptions: selectOptions
+    };
+  }
 
-  return (
-    <Form.Select
-      label="Filter by Home or Away"
-      selection={true}
-      value={props.selectedStandingType}
-      options={selectOptions}
-      onChange={handleChange}
-      className="pl-dropdown"
-    />
-  );
+  handleChange = (event: SyntheticEvent<HTMLSelectElement>, data: SelectProps) => {
+    this.props.onChange(data.value as StandingType);
+  }
+
+  render() {
+    return (
+      <Form.Select
+        label="Filter by Home or Away"
+        selection={true}
+        value={this.props.selectedStandingType}
+        options={this.state.selectOptions}
+        onChange={this.handleChange}
+        className="pl-dropdown"
+      />
+    );
+  }
 };
 
 export default StandingTypeSelector;
