@@ -4,15 +4,15 @@ import { Fixture } from '../_shared/Fixture';
 import { SELECT_ALL_TEAMS } from '../../utils/constants';
 
 export interface Props {
-  round: number;
   matches: Match[];
+  selectedRoundNumber: number;
   selectedTeamId: string;
 }
 
 export const ResultsList: React.StatelessComponent<Props> = (props: Props) => {
-  const { round, matches, selectedTeamId } = props;
+  const { matches, selectedRoundNumber, selectedTeamId } = props;
 
-  if (round === null) {
+  if (selectedRoundNumber === null) {
     return null;
   }
 
@@ -34,6 +34,7 @@ export const ResultsList: React.StatelessComponent<Props> = (props: Props) => {
 
   return (
     <div className="pl-results-list-container">
+      <div className="pl-results-list-title">Round {selectedRoundNumber}</div>
       <ul className="pl-results-list">{matchList}</ul>
     </div>
   );

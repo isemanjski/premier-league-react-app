@@ -7,7 +7,7 @@ import { RoundSelector } from '../../components/_shared/RoundSelector';
 import { ResultsList } from '../../components/rounds/ResultsList';
 import { SeasonSelector } from '../../components/_shared/SeasonSelector';
 import { TeamSelector } from '../../components/_shared/TeamSelector';
-import { SELECT_ALL_TEAMS } from '../../utils/constants';
+import { SELECT_ALL_ROUNDS, SELECT_ALL_TEAMS } from '../../utils/constants';
 
 const mapStateToProps = (state: RootState) => ({
   matchesByRound: state.seasonState.season.matchesByRound,
@@ -29,13 +29,25 @@ export interface State {
   selectedTeamId: string;
 }
 
+const createResultsList = (round: RoundMatches, teamId: string) => {
+  return (
+    <div key={round.round} style={{ marginBottom: '20px' }}>
+      <ResultsList
+        matches={round.matches}
+        selectedRoundNumber={round.round}
+        selectedTeamId={teamId}
+      />
+    </div>
+  );
+};
+
 class ResultsPage extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      selectedRoundNumber: props.selectedRoundNumber,
+      selectedRoundNumber: SELECT_ALL_ROUNDS,
       selectedTeamId: SELECT_ALL_TEAMS
     };
   }
@@ -56,8 +68,18 @@ class ResultsPage extends React.Component<Props, State> {
     const { matchesByRound, roundNumbers, teams } = this.props;
     const { selectedRoundNumber, selectedTeamId } = this.state;
 
-    const selectedRound = matchesByRound.find(round => round.round === selectedRoundNumber);
-    const selectedMatches = selectedRound && selectedRound.matches || [];
+    // tslint:disable-next-line
+    let contentList: any[] = [];
+    if (selectedRoundNumber === SELECT_ALL_ROUNDS) {
+      contentList = matchesByRound.map(round => {
+        return createResultsList(round, selectedTeamId);
+      });
+    } else {
+      const selectedRound = matchesByRound.find(round => round.round === selectedRoundNumber);
+      if (selectedRound) {
+        contentList = [createResultsList(selectedRound, selectedTeamId)];
+      }
+    }
 
     return (
       <div>
@@ -77,11 +99,7 @@ class ResultsPage extends React.Component<Props, State> {
           </Form.Group>
         </Form>
 
-        <ResultsList
-          round={selectedRoundNumber}
-          matches={selectedMatches}
-          selectedTeamId={selectedTeamId}
-        />
+        {contentList}
       </div>
     );
   }

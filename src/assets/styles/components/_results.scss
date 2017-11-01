@@ -20,3 +20,12 @@ $list-item-border-color: #dedede;
     border-top: 1px solid $list-item-border-color;
   }
 }
+
+.pl-results-list-title {
+  font-weight: bold;
+  width: 100%;
+  padding: 15px 0;
+  font-size: 17px;
+  text-align: center;
+  text-transform: uppercase;
+}

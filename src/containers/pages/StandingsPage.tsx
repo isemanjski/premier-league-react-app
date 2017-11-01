@@ -8,6 +8,7 @@ import { StandingsTable } from '../../components/standings/StandingsTable';
 import { StandingTypeSelector } from '../../components/standings/partials/StandingTypeSelector';
 import { StandingType } from '../../utils/standing-type.enum';
 import { SeasonSelector } from '../../components/_shared/SeasonSelector';
+import { SELECT_ALL_ROUNDS } from '../../utils/constants';
 
 const mapStateToProps = (state: RootState) => ({
   standingsByRound: state.seasonState.season.standingsByRound,
@@ -33,7 +34,7 @@ class StandingsPage extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      selectedRoundNumber: props.selectedRoundNumber,
+      selectedRoundNumber: SELECT_ALL_ROUNDS,
       selectedStandingType: StandingType.Overall
     };
   }
@@ -54,7 +55,13 @@ class StandingsPage extends React.Component<Props, State> {
     const { standingsByRound, roundNumbers } = this.props;
     const { selectedRoundNumber, selectedStandingType } = this.state;
 
-    const selectedRound = standingsByRound.find(round => round.round === selectedRoundNumber);
+    let selectedRound = null;
+    if (selectedRoundNumber === SELECT_ALL_ROUNDS) {
+      selectedRound = standingsByRound[standingsByRound.length - 1];
+    } else {
+      selectedRound = standingsByRound.find(round => round.round === selectedRoundNumber);
+    }
+
     const selectedStandings = selectedRound && selectedRound.standings || [];
 
     return (
