@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Match } from '../../api/models';
-import Fixture from './Fixture';
+import { Fixture } from '../_shared/Fixture';
 
 export interface Props {
   round: number;
   matches: Match[];
 }
 
-const ResultsList: React.StatelessComponent<Props> = (props: Props) => {
+export const ResultsList: React.StatelessComponent<Props> = (props: Props) => {
   const { round, matches } = props;
 
   if (round === null) {
@@ -28,5 +28,3 @@ const ResultsList: React.StatelessComponent<Props> = (props: Props) => {
     </div>
   );
 };
-
-export default ResultsList;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Container, Image } from 'semantic-ui-react';
 
-const Header: React.StatelessComponent = () => {
+export const Header: React.StatelessComponent = () => {
   return (
     <div className="pl-header-container">
       <Container className="pl-header">
@@ -15,5 +15,3 @@ const Header: React.StatelessComponent = () => {
     </div>
   );
 };
-
-export default Header;

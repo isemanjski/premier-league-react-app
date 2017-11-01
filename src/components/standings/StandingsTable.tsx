@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { Standing } from '../../api/models';
-import { StandingType } from '../../constants/standing-type.enum';
-import StandingRow from './StandingsTableRow';
-import StandingsTableHeader from './StandingsTableHeader';
+import { StandingType } from '../../utils/standing-type.enum';
+import { StandingsTableRow } from './StandingsTableRow';
+import { StandingsTableHeader } from './StandingsTableHeader';
 
 interface Props {
   standings: Standing[];
   standingType: StandingType;
 }
 
-const StandingsTable: React.StatelessComponent<Props> = (props: Props) => {
+export const StandingsTable: React.StatelessComponent<Props> = (props: Props) => {
   const { standings, standingType } = props;
 
   // Sort standings array by number of points descending depending on selected standings type (overall, home or away)
@@ -18,7 +18,7 @@ const StandingsTable: React.StatelessComponent<Props> = (props: Props) => {
   });
 
   const tableRows = sortedStandings.map(standing => (
-    <StandingRow key={standing[standingType].position} standing={standing} standingType={standingType}/>
+    <StandingsTableRow key={standing[standingType].position} standing={standing} standingType={standingType}/>
   ));
 
   return (
@@ -38,7 +38,7 @@ const StandingsTable: React.StatelessComponent<Props> = (props: Props) => {
           <abbr title="Goals Against">GA</abbr>
         </StandingsTableHeader>
         <StandingsTableHeader className="pl-number-column text-center d-sm-none">
-           <abbr title="Goal Difference">GD</abbr>
+          <abbr title="Goal Difference">GD</abbr>
         </StandingsTableHeader>
         <StandingsTableHeader className="text-center d-md-none">Form</StandingsTableHeader>
         <StandingsTableHeader fullText="Points" shortText="Pts" className="pl-number-column text-center"/>
@@ -50,5 +50,3 @@ const StandingsTable: React.StatelessComponent<Props> = (props: Props) => {
     </table>
   );
 };
-
-export default StandingsTable;

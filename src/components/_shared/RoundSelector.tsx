@@ -14,7 +14,7 @@ interface State {
   selectOptions: any[];
 }
 
-class RoundSelector extends React.Component<Props, State> {
+export class RoundSelector extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
@@ -49,5 +49,3 @@ class RoundSelector extends React.Component<Props, State> {
     );
   }
 }
-
-export default RoundSelector;

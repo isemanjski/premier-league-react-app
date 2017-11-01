@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StandingType } from '../../constants/standing-type.enum';
-import { Standing } from '../../api/models';
+import { StandingType } from '../../../utils/standing-type.enum';
+import { Standing } from '../../../api/models/index';
 import { Popup } from 'semantic-ui-react';
 
 interface Props {
@@ -12,7 +12,7 @@ const MOVEMENT_UP = 'up';
 const MOVEMENT_DOWN = 'down';
 const MOVEMENT_NONE = 'none';
 
-const Position: React.StatelessComponent<Props> = (props: Props) => {
+export const Position: React.StatelessComponent<Props> = (props: Props) => {
   const { standing, standingType } = props;
   const currentPosition = standing[standingType].position;
   const prevPosition = standing[standingType].prevPosition;
@@ -49,5 +49,3 @@ const Position: React.StatelessComponent<Props> = (props: Props) => {
     </div>
   );
 };
-
-export default Position;

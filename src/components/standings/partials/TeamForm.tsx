@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { POINTS_FOR_DRAW, POINTS_FOR_WINNING } from '../../constants/constants';
-import { StandingType } from '../../constants/standing-type.enum';
-import { Match, Standing } from '../../api/models';
+import { POINTS_FOR_DRAW, POINTS_FOR_WINNING } from '../../../utils/constants';
+import { StandingType } from '../../../utils/standing-type.enum';
+import { Match, Standing } from '../../../api/models';
 
 interface Props {
   standing: Standing;
@@ -14,7 +14,7 @@ const FORM_WIN = 'W';
 const FORM_LOSS = 'L';
 const FORM_DRAW = 'D';
 
-const TeamForm: React.StatelessComponent<Props> = (props: Props) => {
+export const TeamForm: React.StatelessComponent<Props> = (props: Props) => {
   const { standing, standingType } = props;
 
   // Team for which is form calculated
@@ -64,5 +64,3 @@ const TeamForm: React.StatelessComponent<Props> = (props: Props) => {
     </ul>
   );
 };
-
-export default TeamForm;

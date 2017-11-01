@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Container, Dimmer, Loader, Message } from 'semantic-ui-react';
-import { Season } from '../api/models';
-import { fetchSeasonData } from '../api/api';
-import { RootState } from '../store/root-reducer';
-import Header from '../components/header/Header';
-import Navigation from '../components/navigation/Navigation';
+import { Season } from '../../api/models/index';
+import { fetchSeasonData } from '../../api/api';
+import { RootState } from '../../store/root-reducer';
+import { Header } from '../../components/header/Header';
+import { Navigation } from '../../components/navigation/Navigation';
 
 /**
  * Maps Redux store updates to component props.

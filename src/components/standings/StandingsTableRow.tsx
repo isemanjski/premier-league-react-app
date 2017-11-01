@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { Standing, StandingByType } from '../../api/models';
-import { StandingType } from '../../constants/standing-type.enum';
-import TeamForm from './TeamForm';
-import Position from './Position';
+import { StandingType } from '../../utils/standing-type.enum';
+import { TeamForm } from './partials/TeamForm';
+import { Position } from './partials/Position';
 
 interface Props {
   standing: Standing;
   standingType: StandingType;
 }
 
-const StandingsTableRow: React.StatelessComponent<Props> = (props: Props) => {
+export const StandingsTableRow: React.StatelessComponent<Props> = (props: Props) => {
   const { standing, standingType } = props;
   const stat = standing[standingType] as StandingByType;
 
@@ -35,5 +35,3 @@ const StandingsTableRow: React.StatelessComponent<Props> = (props: Props) => {
     </tr>
   );
 };
-
-export default StandingsTableRow;

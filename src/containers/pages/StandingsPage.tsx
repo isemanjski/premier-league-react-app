@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Form } from 'semantic-ui-react';
 import { RootState } from '../../store/root-reducer';
 import { RoundStandings } from '../../api/models';
-import RoundSelector from '../rounds/RoundSelector';
-import StandingsTable from './StandingsTable';
-import StandingsTypeSelector from './StandingTypeSelector';
-import { StandingType } from '../../constants/standing-type.enum';
-import SeasonSelector from './SeasonSelector';
+import { RoundSelector } from '../../components/_shared/RoundSelector';
+import { StandingsTable } from '../../components/standings/StandingsTable';
+import { StandingTypeSelector } from '../../components/standings/partials/StandingTypeSelector';
+import { StandingType } from '../../utils/standing-type.enum';
+import { SeasonSelector } from '../../components/_shared/SeasonSelector';
 
 const mapStateToProps = (state: RootState) => ({
   standingsByRound: state.seasonState.season.standingsByRound,
@@ -27,7 +27,7 @@ export interface State {
   selectedStandingType: StandingType;
 }
 
-class Standings extends React.Component<Props, State> {
+class StandingsPage extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
@@ -59,7 +59,7 @@ class Standings extends React.Component<Props, State> {
 
     return (
       <div>
-        <Form>
+        <Form style={{ marginBottom: '36px' }}>
           <Form.Group widths="equal">
             <SeasonSelector/>
             <RoundSelector
@@ -67,7 +67,7 @@ class Standings extends React.Component<Props, State> {
               selectedRoundNumber={selectedRoundNumber}
               onChange={this.handleRoundNumberChange}
             />
-            <StandingsTypeSelector
+            <StandingTypeSelector
               selectedStandingType={selectedStandingType}
               onChange={this.handleStandingTypeChange}
             />
@@ -84,4 +84,4 @@ class Standings extends React.Component<Props, State> {
 
 }
 
-export default connect(mapStateToProps)(Standings);
+export default connect(mapStateToProps)(StandingsPage);

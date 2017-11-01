@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Match } from '../../api/models';
+import { Match } from '../../api/models/index';
 
 export interface Props {
   match: Match;
 }
 
-const Fixture: React.StatelessComponent<Props> = (props: Props) => {
+export const Fixture: React.StatelessComponent<Props> = (props: Props) => {
   const { match } = props;
 
   return (
@@ -24,5 +24,3 @@ const Fixture: React.StatelessComponent<Props> = (props: Props) => {
     </div>
   );
 };
-
-export default Fixture;

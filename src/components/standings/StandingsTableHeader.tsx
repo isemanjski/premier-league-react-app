@@ -8,7 +8,7 @@ interface Props {
   children?: React.ReactNode;
 }
 
-const StandingsTableHeader: React.StatelessComponent<Props> = (props: Props) => {
+export const StandingsTableHeader: React.StatelessComponent<Props> = (props: Props) => {
   const { fullText, shortText, className, children } = props;
 
   const content = (
@@ -28,5 +28,3 @@ const StandingsTableHeader: React.StatelessComponent<Props> = (props: Props) => 
     </th>
   );
 };
-
-export default StandingsTableHeader;

@@ -5,13 +5,12 @@ import { browserHistory, IndexRoute, Route, Router } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import registerServiceWorker from './registerServiceWorker';
 import { store } from './store';
-import Standings from './components/standings/Standings';
-import Results from './components/rounds/Results';
-import MainLayout from './containers/MainLayout';
+import MainLayout from './containers/layouts/MainLayout';
+import StandingsPage from './containers/pages/StandingsPage';
+import ResultsPage from './containers/pages/ResultsPage';
 
-// Import Semantic UI CSS
+// Import Semantic UI styles
 import 'semantic-ui-css/semantic.min.css';
-
 // Import own styles
 import './assets/styles/main.css';
 
@@ -22,9 +21,9 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={MainLayout}>
-        <IndexRoute component={Standings}/>
-        <Route path="standings" component={Standings}/>
-        <Route path="results" component={Results}/>
+        <IndexRoute component={StandingsPage}/>
+        <Route path="standings" component={StandingsPage}/>
+        <Route path="results" component={ResultsPage}/>
       </Route>
     </Router>
   </Provider>,

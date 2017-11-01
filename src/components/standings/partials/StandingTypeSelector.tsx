@@ -1,10 +1,9 @@
-// tslint:disable:no-any
-
 import * as React from 'react';
 import { SyntheticEvent } from 'react';
 import { Form, SelectProps } from 'semantic-ui-react';
-import { StandingType } from '../../constants/standing-type.enum';
+import { StandingType } from '../../../utils/standing-type.enum';
 
+// tslint:disable:no-any
 interface Props {
   selectedStandingType: StandingType;
   onChange: Function;
@@ -16,7 +15,7 @@ interface State {
 
 const standingTypes = [StandingType.Overall, StandingType.Home, StandingType.Away];
 
-class StandingTypeSelector extends React.Component<Props, State> {
+export class StandingTypeSelector extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
@@ -50,6 +49,4 @@ class StandingTypeSelector extends React.Component<Props, State> {
       />
     );
   }
-};
-
-export default StandingTypeSelector;
+}

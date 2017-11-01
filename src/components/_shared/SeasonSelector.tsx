@@ -12,7 +12,7 @@ interface State {
   selectOptions: any[];
 }
 
-class SeasonSelector extends React.Component<Props, State> {
+export class SeasonSelector extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
@@ -42,5 +42,3 @@ class SeasonSelector extends React.Component<Props, State> {
     );
   }
 }
-
-export default SeasonSelector;

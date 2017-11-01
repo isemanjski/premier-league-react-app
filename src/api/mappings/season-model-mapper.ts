@@ -1,6 +1,6 @@
-import { StandingType } from '../../constants/standing-type.enum';
+import { StandingType } from '../../utils/standing-type.enum';
 import { Match, RoundMatches, RoundStandings, Season, Standing, StandingByType, Team } from '../models';
-import { POINTS_FOR_DRAW, POINTS_FOR_LOSING, POINTS_FOR_WINNING } from '../../constants/constants';
+import { POINTS_FOR_DRAW, POINTS_FOR_LOSING, POINTS_FOR_WINNING } from '../../utils/constants';
 
 const SIDE_HOME = 'home';
 const SIDE_AWAY = 'away';

@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { Form } from 'semantic-ui-react';
 import { RoundMatches } from '../../api/models';
 import { RootState } from '../../store/root-reducer';
-import RoundSelector from './RoundSelector';
-import ResultsList from './ResultsTable';
-import SeasonSelector from '../standings/SeasonSelector';
+import { RoundSelector } from '../../components/_shared/RoundSelector';
+import { ResultsList } from '../../components/rounds/ResultsList';
+import { SeasonSelector } from '../../components/_shared/SeasonSelector';
 
 const mapStateToProps = (state: RootState) => ({
   matchesByRound: state.seasonState.season.matchesByRound,
@@ -24,7 +24,7 @@ export interface State {
   selectedRoundNumber: number;
 }
 
-class Results extends React.Component<Props, State> {
+class ResultsPage extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
@@ -69,4 +69,4 @@ class Results extends React.Component<Props, State> {
   }
 }
 
-export default connect(mapStateToProps)(Results);
+export default connect(mapStateToProps)(ResultsPage);
