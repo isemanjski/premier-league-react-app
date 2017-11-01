@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Form } from 'semantic-ui-react';
 
-const SeasonSelector: React.StatelessComponent = () => {
-  const seasonYears = ['2016/2017'];
+const seasons = ['2016/2017'];
 
-  const selectOptions = seasonYears.map(seasonYear => {
+const SeasonSelector: React.StatelessComponent = () => {
+  const selectOptions = seasons.map(seasonYear => {
     return ({
       key: seasonYear,
       text: seasonYear,
@@ -16,7 +16,7 @@ const SeasonSelector: React.StatelessComponent = () => {
     <Form.Select
       label="Filter by Season"
       selection={true}
-      value={seasonYears[0]}
+      value={seasons[0]}
       options={selectOptions}
       className="pl-dropdown"
     />

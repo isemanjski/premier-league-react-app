@@ -1,0 +1,42 @@
+.pl-fixture {
+  padding: 5px 0;
+
+  &__teams {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__team {
+    font-weight: 400;
+    font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+  }
+
+  &__teams &__team:first-child {
+    text-align: right;
+  }
+
+  &__score {
+    margin: 0 20px;
+    background: #38003c;
+    font-size: 14px;
+    color: #fff;
+    width: 60px;
+    display: inline-block;
+    padding: 4px 2px;
+    text-align: center;
+    height: 30px;
+    line-height: 24px;
+  }
+
+  &__score-dash {
+    padding: 0 .5em;
+    font-weight: 400;
+    vertical-align: initial;
+  }
+
+}

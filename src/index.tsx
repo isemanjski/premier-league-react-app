@@ -6,7 +6,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import registerServiceWorker from './registerServiceWorker';
 import { store } from './store';
 import Standings from './components/standings/Standings';
-import RoundsTable from './components/rounds/RoundsTable';
+import Results from './components/rounds/Results';
 import MainLayout from './containers/MainLayout';
 
 // Import Semantic UI CSS
@@ -24,7 +24,7 @@ ReactDOM.render(
       <Route path="/" component={MainLayout}>
         <IndexRoute component={Standings}/>
         <Route path="standings" component={Standings}/>
-        <Route path="results" component={RoundsTable}/>
+        <Route path="results" component={Results}/>
       </Route>
     </Router>
   </Provider>,
