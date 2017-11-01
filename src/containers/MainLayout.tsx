@@ -12,9 +12,9 @@ import Navigation from '../components/navigation/Navigation';
  * Any time the store is updated, `mapStateToProps` will be called.
  */
 const mapStateToProps = (state: RootState) => ({
-  season: state.season.season,
-  isLoading: state.season.isLoading,
-  error: state.season.error
+  season: state.seasonState.season,
+  sessionDataLoading: state.seasonState.sessionDataLoading,
+  sessionDataError: state.seasonState.sessionDataError
 });
 
 /**
@@ -27,8 +27,8 @@ const mapDispatchToProps = (dispatch: Function) => ({
 
 interface Props {
   season: Season;
-  isLoading: boolean;
-  error: string | null;
+  sessionDataLoading: boolean;
+  sessionDataError: string | null;
   fetchSeasonData: () => void;
   children?: React.ReactNode;
 }
@@ -41,7 +41,7 @@ class MainLayout extends React.Component<Props> {
   }
 
   render() {
-    const { season, isLoading, error } = this.props;
+    const { season, sessionDataLoading, sessionDataError } = this.props;
 
     const isDataDefined = season && season.matchesByRound.length > 0;
     let content = null;
@@ -60,15 +60,15 @@ class MainLayout extends React.Component<Props> {
 
         <div className="pl-main-container">
           <Container className="pl-main-container-content">
-            <Message hidden={!error} negative={true} icon={true}>
+            <Message hidden={!sessionDataError} negative={true} icon={true}>
               <Message.Content>
                 <Message.Header>Error</Message.Header>
-                {error}
+                {sessionDataError}
               </Message.Content>
             </Message>
 
-            <Dimmer active={isLoading} inverted={true}>
-              <Loader active={isLoading}>Loading</Loader>
+            <Dimmer active={sessionDataLoading} inverted={true}>
+              <Loader active={sessionDataLoading}>Loading</Loader>
             </Dimmer>
 
             {content}

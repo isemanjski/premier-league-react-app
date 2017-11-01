@@ -21,8 +21,8 @@ describe('season reducer', () => {
     expect(reducer(undefined, {} as any)).toEqual(<SeasonState> {
       season: new Season(),
       selectedRoundNumber: null,
-      isLoading: false,
-      error: null
+      sessionDataLoading: false,
+      sessionDataError: null
     });
   });
 
@@ -32,8 +32,8 @@ describe('season reducer', () => {
     });
 
     expect(state).toEqual(<SeasonState> {
-      isLoading: true,
-      error: null
+      sessionDataLoading: true,
+      sessionDataError: null
     });
   });
 
@@ -43,7 +43,7 @@ describe('season reducer', () => {
       payload: data
     });
 
-    expect(state.isLoading).toEqual(false);
+    expect(state.sessionDataLoading).toEqual(false);
     expect(state.selectedRoundNumber).toEqual(1);
     expect(state.season.teams.length).toEqual(2);
     expect(state.season.matchesByRound[0].matches[0].awayTeamGoals).toEqual(1);
@@ -59,19 +59,8 @@ describe('season reducer', () => {
     });
 
     expect(state).toEqual(<SeasonState> {
-      isLoading: false,
-      error: 'Error message'
-    });
-  });
-
-  it('should handle SELECT_ROUND_IN_SEASON', () => {
-    const state = reducer({} as SeasonState, {
-      type: types.SELECT_ROUND_IN_SEASON,
-      payload: 1
-    });
-
-    expect(state).toEqual(<SeasonState> {
-      selectedRoundNumber: 1
+      sessionDataLoading: false,
+      sessionDataError: 'Error message'
     });
   });
 
