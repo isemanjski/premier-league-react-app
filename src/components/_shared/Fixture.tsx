@@ -1,15 +1,18 @@
 import * as React from 'react';
-import { Match } from '../../api/models/index';
+import { Match } from '../../api/models';
 
 export interface Props {
   match: Match;
+  size?: 'small';
 }
 
 export const Fixture: React.StatelessComponent<Props> = (props: Props) => {
-  const { match } = props;
+  const { match, size } = props;
+
+  const classNames = ['pl-fixture', size === 'small' ? 'pl-fixture--small' : null].join(' ');
 
   return (
-    <div className="pl-fixture">
+    <div className={classNames}>
       <span className="pl-fixture__teams">
         <span className="pl-fixture__team">
           <span className="teamName">{match.homeTeam.name}</span>

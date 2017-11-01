@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { StandingType } from '../../../utils/standing-type.enum';
-import { Standing } from '../../../api/models/index';
 import { Popup } from 'semantic-ui-react';
+import { StandingType } from '../../../utils/standing-type.enum';
+import { Standing } from '../../../api/models';
 
 interface Props {
   standing: Standing;
@@ -31,7 +31,7 @@ export const Position: React.StatelessComponent<Props> = (props: Props) => {
 
   const popupStyle = {
     padding: '6px 10px',
-    borderRadius: '1px'
+    borderRadius: '3px'
   };
 
   return (

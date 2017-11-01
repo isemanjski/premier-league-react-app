@@ -40,4 +40,19 @@
     vertical-align: initial;
   }
 
+  &--small &__team {
+    font-size: 13px;
+    font-weight: bold;
+    overflow: initial;
+    text-overflow: unset;
+  }
+
+  &--small &__score {
+    margin: 0 8px;
+    width: 50px;
+    height: 25px;
+    line-height: 18px;
+    font-size: 13px;
+  }
+
 }

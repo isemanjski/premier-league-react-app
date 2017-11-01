@@ -1,11 +1,18 @@
 import * as React from 'react';
+import { Popup } from 'semantic-ui-react';
 import { POINTS_FOR_DRAW, POINTS_FOR_WINNING } from '../../../utils/constants';
 import { StandingType } from '../../../utils/standing-type.enum';
 import { Match, Standing } from '../../../api/models';
+import { Fixture } from '../../_shared/Fixture';
 
 interface Props {
   standing: Standing;
   standingType: StandingType;
+}
+
+interface TeamForm {
+  label: string;
+  match: Match;
 }
 
 const FORM_MATCHES = 5;
@@ -48,19 +55,34 @@ export const TeamForm: React.StatelessComponent<Props> = (props: Props) => {
   };
 
   // From last N or less matches calculate team form
-  const teamFormList: string[] = lastNMatches.map(match => {
+  const teamFormList: TeamForm[] = lastNMatches.map(match => {
     if (match.homeTeam.id === team.id) {
-      return getFormLabelFromPoints(match.homeTeamPoints);
+      return { label: getFormLabelFromPoints(match.homeTeamPoints), match: match };
     } else {
-      return getFormLabelFromPoints(match.awayTeamPoints);
+      return { label: getFormLabelFromPoints(match.awayTeamPoints), match: match };
     }
   });
 
+  const popupStyle = {
+    padding: '6px 10px',
+    borderRadius: '3px'
+  };
+
   return (
-    <ul className="p-0 m-0">
-      {teamFormList.map((teamForm: string, index: number) => (
-        <li key={index} className={`pl-team-form ${teamForm.toLowerCase()}`}>{teamForm}</li>
-      ))}
-    </ul>
+    <div>
+      {teamFormList.map((teamForm: TeamForm, index: number) => (
+        <Popup
+          key={index}
+          trigger={<span className={`pl-team-form ${teamForm.label.toLowerCase()}`}>{teamForm.label}</span>}
+          wide={true}
+          style={popupStyle}
+        >
+          <Popup.Content>
+            <Fixture match={teamForm.match} size={'small'}/>
+          </Popup.Content>
+        </Popup>
+      ))
+      }
+    </div>
   );
 };
