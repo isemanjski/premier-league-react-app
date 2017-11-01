@@ -16,3 +16,9 @@
 .pl-dropdown .ui.selection.active.dropdown .menu {
   border-color: $highlight-color-lighter;
 }
+
+.ui.form .field.pl-dropdown > label {
+  color: rgba(0, 0, 0, .37);
+  font-size: .8em;
+  text-transform: uppercase;
+}

@@ -7,6 +7,12 @@
   margin-bottom: 20px;
 }
 
+.pl-main-container > .container {
+  box-shadow: none;
+  border: none;
+  border-radius: 3px;
+}
+
 .pl-main-container-content {
   position: relative;
   min-height: 500px;

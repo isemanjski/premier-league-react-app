@@ -1,0 +1,30 @@
+@import "../abstracts/variables";
+
+.pl-navigation {
+  //background: #e90052;
+  //background: #ca235e;
+  background: hsla(300, 52%, 19%, 1);
+  border-bottom: 1px solid rgba(34, 36, 38, 0.10);
+  height: 60px;
+
+  .ui.secondary.inverted.pointing.menu {
+    border: none;
+  }
+
+  .ui.secondary.pointing.menu .item.pl-menu-item {
+    align-self: center;
+    margin: 0 20px -3px 0;
+    border-bottom-width: 3px;
+    line-height: 31px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    font-weight: 800;
+    position: relative;
+  }
+
+  .ui.secondary.inverted.pointing.menu .active.pl-menu-item {
+    //border-color: $highlight-color !important;
+    border: none;
+  }
+
+}

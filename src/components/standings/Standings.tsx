@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Divider, Form, Header } from 'semantic-ui-react';
+import { Form } from 'semantic-ui-react';
 import { RootState } from '../../store/root-reducer';
 import { actionCreators } from '../../store/season';
 import { RoundStandings } from '../../api/models';
@@ -49,9 +49,6 @@ class Standings extends React.Component<Props, State> {
 
     return (
       <div>
-        <Header as="h2">Standings</Header>
-        <Divider/>
-
         <Form>
           <Form.Group widths="equal">
             <SeasonSelector />

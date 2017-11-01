@@ -6,7 +6,7 @@
 
 .pl-header-container {
   background-color: $primary-color;
-  padding: 30px 0;
+  padding: 20px 0;
 }
 
 .pl-header {
@@ -16,18 +16,4 @@
 
 .pl-logo {
   margin-right: 30px;
-}
-
-.pl-header-menu {
-  margin: 0 0 0 auto !important;
-}
-
-.ui.secondary.pointing.menu .item.pl-menu-item {
-  margin: 0 0 -3px;
-  border-bottom-width: 3px;
-  align-self: center;
-}
-
-.ui.secondary.inverted.pointing.menu .active.pl-menu-item {
-  border-color: $highlight-color !important;
 }

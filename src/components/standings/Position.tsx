@@ -19,9 +19,9 @@ const Position: React.StatelessComponent<Props> = (props: Props) => {
 
   const getMovementFromPosition = (curPos: number, lastPos: number): string => {
     if (curPos > lastPos) {
-      return MOVEMENT_UP;
-    } else if (curPos < lastPos) {
       return MOVEMENT_DOWN;
+    } else if (curPos < lastPos) {
+      return MOVEMENT_UP;
     }
     return MOVEMENT_NONE;
   };
