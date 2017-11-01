@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+// Configuration and helpers
+@import "abstracts/variables";
+
+// Base stuff
+@import "base/base";
+@import "base/utils";
+
+// Components
+@import "components/dropdown";
+@import "components/header";
+@import "components/main-contrainer";
+@import "components/position";
+@import "components/standings-table";
+@import "components/team-form";
+
+// Page-specific styles
+
+
+// Themes
+

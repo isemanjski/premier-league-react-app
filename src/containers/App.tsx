@@ -1,12 +1,15 @@
 import * as React from 'react';
-import MainLayout from './MainLayout';
+import MainContainer from './MainContainer';
+import Header from '../components/header/Header';
 
 class App extends React.Component {
   render() {
     return (
-      <div>
-        {/*<Header/>*/}
-        <MainLayout/>
+      <div className="">
+        <div className="">
+          <Header active={'work'}/>
+          <MainContainer/>
+        </div>
       </div>
     );
   }

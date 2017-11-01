@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Standing } from '../../api/models';
 import { StandingType } from '../../constants/standing-type.enum';
-import StandingRow from './StandingRow';
+import StandingRow from './StandingsTableRow';
+import StandingsTableHeader from './StandingsTableHeader';
 
 interface Props {
   standings: Standing[];
@@ -11,7 +12,7 @@ interface Props {
 const StandingsTable: React.StatelessComponent<Props> = (props: Props) => {
   const { standings, standingType } = props;
 
-  // Sort standings array with number of points in selected standings type ('overall', 'home' or 'away') - descending
+  // Sort standings array by number of points descending depending on selected standings type (overall, home or away)
   const sortedStandings = standings.slice().sort((s1: Standing, s2: Standing) => {
     return (s2[standingType].points - s1[standingType].points);
   });
@@ -21,20 +22,26 @@ const StandingsTable: React.StatelessComponent<Props> = (props: Props) => {
   ));
 
   return (
-    <table>
+    <table className="pl-standings-table">
       <thead>
       <tr>
-        <th>Position</th>
-        <th>Club</th>
-        <th>Played</th>
-        <th>Won</th>
-        <th>Drawn</th>
-        <th>Lost</th>
-        <th>GF</th>
-        <th>GA</th>
-        <th>GD</th>
-        <th>Form</th>
-        <th>Points</th>
+        <StandingsTableHeader fullText="Position" shortText="Pos" className="pl-pos-column text-center"/>
+        <StandingsTableHeader fullText="Team" className="pl-team-column team-column"/>
+        <StandingsTableHeader fullText="Played" shortText="Pl" className="pl-number-column text-center"/>
+        <StandingsTableHeader fullText="Won" shortText="W" className="pl-number-column text-center"/>
+        <StandingsTableHeader fullText="Drawn" shortText="D" className="pl-number-column text-center"/>
+        <StandingsTableHeader fullText="Lost" shortText="L" className="pl-number-column text-center"/>
+        <StandingsTableHeader className="pl-number-column text-center d-sm-none">
+          <abbr title="Goals For">GF</abbr>
+        </StandingsTableHeader>
+        <StandingsTableHeader className="pl-number-column text-center d-sm-none">
+          <abbr title="Goals Against">GA</abbr>
+        </StandingsTableHeader>
+        <StandingsTableHeader className="pl-number-column text-center d-sm-none">
+           <abbr title="Goal Difference">GD</abbr>
+        </StandingsTableHeader>
+        <StandingsTableHeader className="text-center d-md-none">Form</StandingsTableHeader>
+        <StandingsTableHeader fullText="Points" shortText="Pts" className="pl-number-column text-center"/>
       </tr>
       </thead>
       <tbody>

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { Divider, Form, Header } from 'semantic-ui-react';
 import { RootState } from '../../store/root-reducer';
 import { actionCreators } from '../../store/season';
 import { RoundStandings } from '../../api/models';
@@ -7,6 +8,7 @@ import RoundSelector from '../rounds/RoundSelector';
 import StandingsTable from './StandingsTable';
 import StandingsTypeSelector from './StandingTypeSelector';
 import { StandingType } from '../../constants/standing-type.enum';
+import SeasonSelector from './SeasonSelector';
 
 const mapStateToProps = (state: RootState) => ({
   standingsByRound: state.season.season.standingsByRound,
@@ -47,15 +49,24 @@ class Standings extends React.Component<Props, State> {
 
     return (
       <div>
-        <RoundSelector
-          roundNumbers={this.props.roundNumbers}
-          selectedRoundNumber={this.props.selectedRoundNumber}
-          onSelect={this.props.handleRoundSelect}
-        />
-        <StandingsTypeSelector
-          selectedStandingType={this.state.selectedStandingType}
-          onSelect={this.handleStandingTypeSelect}
-        />
+        <Header as="h2">Standings</Header>
+        <Divider/>
+
+        <Form>
+          <Form.Group widths="equal">
+            <SeasonSelector />
+            <RoundSelector
+              roundNumbers={this.props.roundNumbers}
+              selectedRoundNumber={this.props.selectedRoundNumber}
+              onSelect={this.props.handleRoundSelect}
+            />
+            <StandingsTypeSelector
+              selectedStandingType={this.state.selectedStandingType}
+              onSelect={this.handleStandingTypeSelect}
+            />
+          </Form.Group>
+        </Form>
+
         <StandingsTable
           standings={selectedStandings}
           standingType={this.state.selectedStandingType}

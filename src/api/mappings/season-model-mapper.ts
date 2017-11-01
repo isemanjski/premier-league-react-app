@@ -249,9 +249,6 @@ export const calculateStanding = (team: Team,
 
   const standing = new Standing({ team });
   standing.prevStanding = previousStanding || new Standing();
-  standing.prevOverallPosition = standing.prevStanding.prevOverallPosition;
-  standing.prevHomePosition = standing.prevStanding.homePosition;
-  standing.prevAwayPosition = standing.prevStanding.awayPosition;
 
   const goalsScored = match[`${matchSide}TeamGoals`];
   const goalsReceived = match[`${matchOtherSide}TeamGoals`];
@@ -266,7 +263,8 @@ export const calculateStanding = (team: Team,
     goalsScored: prevOverall.goalsScored + goalsScored,
     goalsConceded: prevOverall.goalsConceded + goalsReceived,
     goalDifference: prevOverall.goalDifference + goalsScored - goalsReceived,
-    points: prevOverall.points + points
+    points: prevOverall.points + points,
+    prevPosition: standing.prevStanding.overall.position
   });
 
   const prevStandingByType = standing.prevStanding[`${matchSide}`];
@@ -278,7 +276,8 @@ export const calculateStanding = (team: Team,
     goalsScored: prevStandingByType.goalsScored + goalsScored,
     goalsConceded: prevStandingByType.goalsConceded + goalsReceived,
     goalDifference: prevStandingByType.goalDifference + goalsScored - goalsReceived,
-    points: prevStandingByType.points + points
+    points: prevStandingByType.points + points,
+    prevPosition: prevStandingByType.position
   });
 
   standing[`${matchOtherSide}`] = { ...standing.prevStanding[`${matchOtherSide}`] };

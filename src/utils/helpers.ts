@@ -34,3 +34,13 @@ export function isNil(value?: any): boolean {
 export function isNotNil(value?: any): boolean {
   return !isNil(value);
 }
+
+/**
+ * Tests if component has children defined.
+ *
+ * @param {Object} children - The children prop of a component.
+ * @returns {Boolean} Returns true if component has at least one child, else false.
+ */
+export function hasChildren(children: any): boolean {
+  return !isNil(children) && Array.isArray(children) && children.length > 0;
+}

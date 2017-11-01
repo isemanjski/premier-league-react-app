@@ -3,6 +3,7 @@ import { isNotNil } from '../../utils/helpers';
 
 export class StandingByType {
   position: number;
+  prevPosition: number;
   played: number;
   won: number;
   drawn: number;
@@ -13,7 +14,8 @@ export class StandingByType {
   points: number;
 
   constructor(props: any = {}) {
-    this.position = isNotNil(props.position) ? props.position : 0;
+    this.position = props.position || null;
+    this.prevPosition = props.prevPosition || null;
     this.played = isNotNil(props.played) ? props.played : 0;
     this.won = isNotNil(props.won) ? props.won : 0;
     this.drawn = isNotNil(props.drawn) ? props.drawn : 0;

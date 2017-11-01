@@ -1,0 +1,20 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to main container of application.
+// -----------------------------------------------------------------------------
+
+.pl-main-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.pl-main-container-content {
+  position: relative;
+  min-height: 500px;
+  padding: 16px;
+  background: #fff;
+  border: none;
+  border-radius: 1px;
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+  -webkit-transition: box-shadow .1s ease, -webkit-transform .1s ease;
+  transition: box-shadow .1s ease, transform .1s ease, -webkit-transform .1s ease;
+}

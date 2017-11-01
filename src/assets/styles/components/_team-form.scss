@@ -1,0 +1,28 @@
+$team-form-size: 26px;
+
+.pl-team-form-width {
+  width: 175px;
+}
+
+.pl-team-form {
+  width: $team-form-size;
+  height: $team-form-size;
+  line-height: $team-form-size;
+  text-align: center;
+  background: #777;
+  color: #fff;
+  margin-right: 5px;
+  border-radius: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 13px;
+  cursor: pointer;
+
+  &.w {
+    background: #61b91f;
+  }
+
+  &.l {
+    background: #e63030;
+  }
+}

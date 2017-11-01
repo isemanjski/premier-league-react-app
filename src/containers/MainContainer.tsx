@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { Container, Dimmer, Loader, Message } from 'semantic-ui-react';
 import { Season } from '../api/models';
 import { fetchSeasonData } from '../api/api';
 import { RootState } from '../store/root-reducer';
@@ -31,7 +32,7 @@ interface Props {
   fetchSeasonData: () => void;
 }
 
-class MainLayout extends React.Component<Props> {
+class MainContainer extends React.Component<Props> {
 
   componentDidMount() {
     // Call api to fetch season data
@@ -39,12 +40,12 @@ class MainLayout extends React.Component<Props> {
   }
 
   render() {
-    const { season, error } = this.props;
+    const { season, isLoading, error } = this.props;
 
     const isDataDefined = season && season.matchesByRound.length > 0;
-    let resultingLayout = null;
+    let content = null;
     if (isDataDefined) {
-      resultingLayout = (
+      content = (
         <div>
           <Standings/>
           <RoundsTable/>
@@ -53,12 +54,24 @@ class MainLayout extends React.Component<Props> {
     }
 
     return (
-      <div className="App">
-        <div className="App-header"/>
-        {error ? error : isDataDefined ? resultingLayout : 'Loading...'}
+      <div className="pl-main-container">
+        <Container className="pl-main-container-content">
+          <Message hidden={!error} negative={true} icon={true}>
+            <Message.Content>
+              <Message.Header>Error</Message.Header>
+              {error}
+            </Message.Content>
+          </Message>
+
+          <Dimmer active={isLoading} inverted={true}>
+            <Loader active={isLoading}>Loading</Loader>
+          </Dimmer>
+
+          {content}
+        </Container>
       </div>
     );
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainLayout);
+export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);

@@ -1,0 +1,13 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+/// Primary color
+$primary-color: #38003c  !default;
+
+/// Highlight color - such for borders or link underline
+$highlight-color: #e90052 !default;
+$highlight-color-lighter: lighten(#e90052, 25%)!default;
+
+/// Main body background color
+$body-bg-color: #efefef !default;

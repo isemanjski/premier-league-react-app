@@ -1,0 +1,18 @@
+@import "../abstracts/variables";
+
+.pl-dropdown > .ui.selection.dropdown {
+  min-height: 1em;
+  padding: .6em 2.1em .6em .8em;
+  border-radius: 1px;
+}
+
+.pl-dropdown > .ui.selection.dropdown > .dropdown.icon {
+  padding: 0.7em;
+}
+
+.pl-dropdown > .ui.selection.active.dropdown,
+.pl-dropdown > .ui.selection.dropdown:focus,
+.pl-dropdown > .ui.selection.active.dropdown:hover,
+.pl-dropdown .ui.selection.active.dropdown .menu {
+  border-color: $highlight-color-lighter;
+}

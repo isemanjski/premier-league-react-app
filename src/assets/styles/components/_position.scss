@@ -1,0 +1,43 @@
+.pl-position-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 10px;
+}
+
+.pl-position {
+  display: inline-block;
+  width: 16px;
+  margin-right: 5px;
+  text-align: right;
+  line-height: 18px;
+}
+
+.pl-position-movement {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+
+  &.none {
+    border-radius: 100%;
+    width: 8px;
+    height: 8px;
+    background: #adadad;
+  }
+
+  &.down,
+  &.up {
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    margin-top: -3px;
+    margin-right: -2px;
+  }
+
+  &.down {
+    border-top: 6px solid #e90052;
+  }
+
+  &.up {
+    border-bottom: 6px solid #13cf00;
+  }
+}

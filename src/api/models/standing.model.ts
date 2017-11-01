@@ -9,9 +9,6 @@ export class Standing {
   overallPosition: number;
   homePosition: number;
   awayPosition: number;
-  prevOverallPosition: number;
-  prevHomePosition: number;
-  prevAwayPosition: number;
   overall: StandingByType;
   home: StandingByType;
   away: StandingByType;
@@ -23,9 +20,6 @@ export class Standing {
     this.overallPosition = isNotNil(props.overallPosition) ? props.overallPosition : null;
     this.homePosition = isNotNil(props.homePosition) ? props.homePosition : null;
     this.awayPosition = isNotNil(props.awayPosition) ? props.awayPosition : null;
-    this.prevOverallPosition = isNotNil(props.prevOverallPosition) ? props.prevOverallPosition : null;
-    this.prevHomePosition = isNotNil(props.prevHomePosition) ? props.prevHomePosition : null;
-    this.prevAwayPosition = isNotNil(props.prevAwayPosition) ? props.prevAwayPosition : null;
     this.overall = props.overall || new StandingByType();
     this.home = props.home || new StandingByType();
     this.away = props.away || new StandingByType();

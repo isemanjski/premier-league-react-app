@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { SyntheticEvent } from 'react';
+import { Form, DropdownProps } from 'semantic-ui-react';
 
 interface Props {
   roundNumbers: number[];
@@ -8,22 +9,27 @@ interface Props {
 }
 
 const RoundSelector: React.StatelessComponent<Props> = (props: Props) => {
-  const optionElements: JSX.Element[] = [];
-
-  props.roundNumbers.forEach(roundNumber => {
-    optionElements.push(
-      <option key={`${roundNumber}`} value={`${roundNumber}`}>ROUND {roundNumber}</option>
-    );
+  const selectOptions = props.roundNumbers.map(roundNumber => {
+    return ({
+      key: roundNumber,
+      text: `Round ${roundNumber}`,
+      value: roundNumber
+    });
   });
 
-  const handleOnChange = (event: SyntheticEvent<HTMLSelectElement>) => {
-    props.onSelect(Number(event.currentTarget.value));
+  const handleChange = (event: SyntheticEvent<HTMLSelectElement>, data: DropdownProps) => {
+    props.onSelect(data.value);
   };
 
   return (
-    <select value={`${props.selectedRoundNumber}`} onChange={handleOnChange}>
-      {optionElements}
-    </select>
+    <Form.Select
+      label="Filter by round"
+      selection={true}
+      value={props.selectedRoundNumber}
+      options={selectOptions}
+      onChange={handleChange}
+      className="pl-dropdown"
+    />
   );
 };
 
