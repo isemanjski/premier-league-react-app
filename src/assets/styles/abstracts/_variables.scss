@@ -5,15 +5,16 @@
 /// Primary color
 $primary-color: #38003c  !default;
 
+// Selection color
+$selection-color: #e42e4c !default;
+
 /// Highlight color - such for borders or link underline
 //$highlight-color: #e90052 !default;
-$highlight-color: hsla(300, 52%, 19%, 1) !default;
-//$highlight-color-lighter: lighten(#e90052, 25%)!default;
-$highlight-color-lighter: lighten($highlight-color, 25%) !default;
+//$highlight-color: hsla(300, 52%, 19%, 1) !default;
+$highlight-color: $selection-color !default;
+$highlight-color-lighter: lighten($highlight-color, 20%) !default;
 
 /// Main body background color
 $body-bg-color: #f5f5f5 !default;
 
-// Selection color
-$selection-color: #e42e4c !default;
 
