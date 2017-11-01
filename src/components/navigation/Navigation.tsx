@@ -8,13 +8,13 @@ export const Navigation: React.StatelessComponent = () => {
       <Container className="">
         <Menu inverted={true} pointing={true} secondary={true} size="large" className="">
           <Menu.Item as={Link} to={'/standings'} activeClassName="active" className="pl-menu-item">
-            Standings
+            <span>Standings</span>
           </Menu.Item>
           <Menu.Item as={Link} to={'/results'} activeClassName="active" className="pl-menu-item">
-            Results
+            <span>Results</span>
           </Menu.Item>
           <Menu.Item as={Link} to={'/stats'} activeClassName="active" className="pl-menu-item">
-            Stats
+            <span>Stats</span>
           </Menu.Item>
         </Menu>
       </Container>

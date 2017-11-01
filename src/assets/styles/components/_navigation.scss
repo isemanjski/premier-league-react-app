@@ -1,8 +1,8 @@
 @import "../abstracts/variables";
 
+$triangle-size: 7px;
+
 .pl-navigation {
-  //background: #e90052;
-  //background: #ca235e;
   background: hsla(300, 52%, 19%, 1);
   border-bottom: 1px solid rgba(34, 36, 38, 0.10);
   height: 60px;
@@ -12,19 +12,39 @@
   }
 
   .ui.secondary.pointing.menu .item.pl-menu-item {
+    position: relative;
+    text-align: center;
+    min-width: 125px;
     align-self: center;
-    margin: 0 20px -3px 0;
-    border-bottom-width: 3px;
-    line-height: 31px;
+    margin: 0;
+    border-bottom-width: 0;
+    line-height: 34px;
     text-transform: uppercase;
     letter-spacing: .05em;
     font-weight: 800;
-    position: relative;
   }
 
   .ui.secondary.inverted.pointing.menu .active.pl-menu-item {
-    //border-color: $highlight-color !important;
     border: none;
+
+    span {
+      width: 100%;
+    }
+
+    span::after {
+      bottom: 0;
+      left: 50%;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+      border-top: none;
+      border-left: $triangle-size solid transparent;
+      border-right: $triangle-size solid transparent;
+      border-bottom: $triangle-size solid white;
+      margin-left: -1 * $triangle-size;
+    }
   }
 
 }
