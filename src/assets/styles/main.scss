@@ -11,15 +11,17 @@
 @import "components/dropdown";
 @import "components/fixture";
 @import "components/header";
-@import "components/main-contrainer";
+@import "pages/main-layout";
 @import "components/navigation";
 @import "components/position";
-@import "components/results";
+@import "pages/results-page";
 @import "components/standings-table";
 @import "components/team-form";
+@import "components/team-top-stats";
 
 // Page-specific styles
-
+@import "pages/not-found-page";
+@import "pages/team-page";
 
 // Themes
 

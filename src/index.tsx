@@ -8,6 +8,7 @@ import { store } from './store';
 import MainLayout from './containers/layouts/MainLayout';
 import StandingsPage from './containers/pages/StandingsPage';
 import ResultsPage from './containers/pages/ResultsPage';
+import TeamPage from './containers/pages/TeamPage';
 
 // Import Semantic UI styles
 import 'semantic-ui-css/semantic.min.css';
@@ -24,6 +25,7 @@ ReactDOM.render(
         <IndexRoute component={StandingsPage}/>
         <Route path="standings" component={StandingsPage}/>
         <Route path="results" component={ResultsPage}/>
+        <Route path="teams/:teamId" component={TeamPage}/>
       </Route>
     </Router>
   </Provider>,

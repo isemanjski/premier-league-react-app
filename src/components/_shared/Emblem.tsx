@@ -10,11 +10,24 @@ export interface Props {
 export const Emblem: React.StatelessComponent<Props> = (props: Props) => {
   const { team, size } = props;
 
+  let height = 0;
+
+  switch (size) {
+    case 'mini':
+      height = 45;
+      break;
+    case 'large':
+      height = 90;
+      break;
+    default:
+      height = 55;
+  }
+
   return (
     <Image
       src={process.env.PUBLIC_URL + '/assets/team-sprites.svg#' + team.id}
       alt={team.name}
-      height={size === 'mini' ? 45 : size === 'large' ? 85 : 55}
+      height={height}
       verticalAlign="middle"
     />
   );

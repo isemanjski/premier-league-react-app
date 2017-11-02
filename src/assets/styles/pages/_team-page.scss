@@ -1,0 +1,18 @@
+.pl-team-page-header {
+  display: flex;
+  align-items: center;
+
+  .pl-team-emblem {
+    font-size: 50px;
+    line-height: 50px;
+    font-weight: bold;
+  }
+
+  .pl-team-details {
+    .team-name {
+      font-size: 35px;
+      font-weight: bold;
+    }
+  }
+
+}

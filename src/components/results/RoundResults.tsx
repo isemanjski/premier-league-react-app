@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Match } from '../../api/models';
 import { Fixture } from '../_shared/Fixture';
 import { SELECT_ALL_TEAMS } from '../../utils/constants';
+import { Divider } from 'semantic-ui-react';
 
 export interface Props {
   matches: Match[];
@@ -9,7 +10,7 @@ export interface Props {
   selectedTeamId: string;
 }
 
-export const ResultsList: React.StatelessComponent<Props> = (props: Props) => {
+export const RoundResults: React.StatelessComponent<Props> = (props: Props) => {
   const { matches, selectedRoundNumber, selectedTeamId } = props;
 
   if (selectedRoundNumber === null) {
@@ -34,7 +35,8 @@ export const ResultsList: React.StatelessComponent<Props> = (props: Props) => {
 
   return (
     <div className="pl-results-list-container">
-      <div className="pl-results-list-title">Round {selectedRoundNumber}</div>
+      {matchList.length > 1 && <Divider horizontal={true}>Round {selectedRoundNumber}</Divider>}
+      {matchList.length === 1 && <div className="pl-results-list-title">Round {selectedRoundNumber}</div>}
       <ul className="pl-results-list">{matchList}</ul>
     </div>
   );

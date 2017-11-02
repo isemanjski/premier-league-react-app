@@ -1,0 +1,39 @@
+$list-item-border-color: #efefef;
+
+.pl-results-filter {
+  margin-bottom: 36px;
+}
+
+.pl-results-list {
+  margin: 0 auto;
+  padding: 0;
+  width: 100%
+}
+
+@media (min-width: 767px) {
+  .pl-results-list {
+    width: 60%
+  }
+}
+
+@media (min-width: 576px) {
+  .pl-results-list {
+    width: 80%
+  }
+}
+
+.pl-results-list-item {
+  list-style: none;
+}
+
+.pl-results-list-title {
+  width: 100%;
+  padding: 0;
+  margin: 14px 0 0;
+  text-align: center;
+  color: rgba(0,0,0,.85);
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: .05em;
+}

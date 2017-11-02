@@ -1,0 +1,64 @@
+@import "../abstracts/variables";
+
+$border-color: #e8e8e8;
+
+.pl-team-top-stats {
+  clear: both;
+  display: table;
+  margin: 30px auto 50px;
+  text-align: center;
+  border-top: 3px solid rgb(115, 16, 115);
+  border-bottom: 1px solid $border-color;
+  font-weight: 400;
+  border-radius: 0 0 3px 3px;
+
+  .stat-container {
+    border-left: 1px solid $border-color;
+    padding: 1rem 2rem;
+    display: table-cell;
+
+    .stat-name {
+      font-weight: bold;
+    }
+
+    .stat-result {
+      margin-top: 13px;
+      font-size: 30px;
+      line-height: 30px;
+      display: block;
+      font-weight: bold;
+    }
+  }
+
+  .stat-container:last-child {
+    border-right: 1px solid $border-color;
+  }
+
+  @media (max-width: 56.25em) {
+    .stat-container {
+      padding: 8px;
+      display: block;
+      width: 33.33%;
+      float: left;
+    }
+
+    .stat-container:nth-child(-n+3) {
+      border-bottom: 1px solid $border-color;
+    }
+
+    .stat-container:nth-child(3) {
+      border-right: 1px solid $border-color;
+    }
+
+    .stat-container .stat-result {
+      margin-top: 8px;
+      font-size: 22px;
+    }
+  }
+}
+
+@media (max-width: 56.25em) {
+  .pl-team-top-stats {
+    border-bottom: 3px solid rgb(115, 16, 115);
+  }
+}
