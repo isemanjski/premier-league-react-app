@@ -42,7 +42,7 @@ class TeamPage extends React.Component<Props> {
       return (
         <div className="pl-team-page">
           <div>
-            <TeamHeader team={selectedTeam} matchesByRound={matchesByRound}/>
+            <TeamHeader team={selectedTeam}/>
           </div>
           <div>
             <Divider horizontal={true}>STATS</Divider>

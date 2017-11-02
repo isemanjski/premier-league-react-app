@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { RoundMatches, Team } from '../../api/models';
+import { Team } from '../../api/models';
 import { Emblem } from '../_shared/Emblem';
 
 export interface Props {
   team: Team;
-  matchesByRound: RoundMatches[];
 }
 
 /**
