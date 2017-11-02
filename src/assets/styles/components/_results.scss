@@ -1,12 +1,13 @@
-$list-item-border-color: #dedede;
+$list-item-border-color: #efefef;
 
 .pl-results-filter {
   margin-bottom: 36px;
 }
 
 .pl-results-list {
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
+  width: 60%
 }
 
 .pl-results-list-item {

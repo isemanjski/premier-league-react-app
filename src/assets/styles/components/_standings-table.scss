@@ -23,20 +23,18 @@ $table-border-color: #e8e8e8;
 
   td,
   th {
-    padding: 7px 10px;
+    padding: 8px 10px;
   }
 
-  .pl-number-column {
+  .pl-number-column,
+  .pl-pos-column {
     width: 5%;
     max-width: 55px;
   }
 
-  .pl-pos-column {
-    width: 8%;
-    max-width: 60px;
-  }
-
   .pl-team-column {
+    padding-top: 0;
+    padding-bottom: 0;
     position: relative;
     text-align: left;
   }
@@ -52,8 +50,17 @@ $table-border-color: #e8e8e8;
     }
 
     .pl-pos-column {
+      width: 8%;
       max-width: 60px;
     }
   }
 
+  .pl-standings-emblem {
+    display: flex;
+    align-items: center;
+
+    img {
+      margin-right: 8px;
+    }
+  }
 }

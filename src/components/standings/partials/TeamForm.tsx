@@ -74,7 +74,7 @@ export const TeamForm: React.StatelessComponent<Props> = (props: Props) => {
         <Popup
           key={index}
           trigger={<span className={`pl-team-form ${teamForm.label.toLowerCase()}`}>{teamForm.label}</span>}
-          wide={true}
+          wide="very"
           style={popupStyle}
         >
           <Popup.Content>

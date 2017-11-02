@@ -2,7 +2,8 @@ import * as React from 'react';
 import { Standing, StandingByType } from '../../api/models';
 import { StandingType } from '../../utils/standing-type.enum';
 import { TeamForm } from './partials/TeamForm';
-import { Position } from './partials/Position';
+import { PositionColumn } from './partials/PositionColumn';
+import { TeamColumn } from './partials/TeamColumn';
 
 interface Props {
   standing: Standing;
@@ -16,9 +17,11 @@ export const StandingsTableRow: React.StatelessComponent<Props> = (props: Props)
   return (
     <tr>
       <td className="pl-pos-column text-center">
-        <Position standing={standing} standingType={standingType}/>
+        <PositionColumn standing={standing} standingType={standingType}/>
       </td>
-      <td className="pl-team-column">{standing.team.name}</td>
+      <td className="pl-team-column">
+        <TeamColumn team={standing.team}/>
+      </td>
       <td className="pl-number-column text-center">{stat.played}</td>
       <td className="pl-number-column text-center">{stat.won}</td>
       <td className="pl-number-column text-center">{stat.drawn}</td>

@@ -14,7 +14,6 @@ $triangle-size: 7px;
   .ui.secondary.pointing.menu .item.pl-menu-item {
     position: relative;
     text-align: center;
-    min-width: 125px;
     align-self: center;
     margin: 0;
     border-bottom-width: 0;
@@ -22,6 +21,7 @@ $triangle-size: 7px;
     text-transform: uppercase;
     letter-spacing: .05em;
     font-weight: 800;
+    display: inline-block;
   }
 
   .ui.secondary.inverted.pointing.menu .active.pl-menu-item {

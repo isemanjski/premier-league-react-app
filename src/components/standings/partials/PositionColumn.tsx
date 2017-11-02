@@ -12,7 +12,7 @@ const MOVEMENT_UP = 'up';
 const MOVEMENT_DOWN = 'down';
 const MOVEMENT_NONE = 'none';
 
-export const Position: React.StatelessComponent<Props> = (props: Props) => {
+export const PositionColumn: React.StatelessComponent<Props> = (props: Props) => {
   const { standing, standingType } = props;
   const currentPosition = standing[standingType].position;
   const prevPosition = standing[standingType].prevPosition;
