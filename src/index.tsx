@@ -9,12 +9,13 @@ import MainLayout from './containers/layouts/MainLayout';
 import StandingsPage from './containers/pages/StandingsPage';
 import ResultsPage from './containers/pages/ResultsPage';
 import TeamPage from './containers/pages/TeamPage';
+import { NotFoundPage } from './containers/pages/NotFoundPage';
 
 // Import Semantic UI styles
 import 'semantic-ui-css/semantic.min.css';
+
 // Import own styles
 import './assets/styles/main.css';
-import { NotFoundPage } from './containers/pages/NotFoundPage';
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);

@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { RoundMatches, Team } from '../../api/models';
-import { POINTS_FOR_LOSING, POINTS_FOR_WINNING } from '../../utils/constants';
+import { Match, RoundStandings, Team } from '../../api/models';
 
 interface Props {
   team: Team;
-  matchesByRound: RoundMatches[];
+  standingsByRound: RoundStandings[];
 }
 
 interface TeamStat {
@@ -13,44 +12,30 @@ interface TeamStat {
 }
 
 export const TeamTopStats: React.StatelessComponent<Props> = (props: Props) => {
-  const { team, matchesByRound } = props;
+  const { team, standingsByRound } = props;
 
-  let matchesPlayed = 0;
-  let wins = 0;
-  let losses = 0;
-  let goals = 0;
-  let goalsConceded = 0;
-  let cleanSheets = 0;
+  const lastRoundStandings = standingsByRound[standingsByRound.length - 1];
+  const teamStanding = lastRoundStandings.standings.find(standing => standing.team.id === team.id);
 
-  // For each round found match that selected teams has participated in and calculate statistics
-  matchesByRound.forEach(round => {
-    const match = round.matches.find(m => m.homeTeam.id === team.id || m.awayTeam.id === team.id);
-    if (match) {
-      // Increase match counter
-      matchesPlayed += 1;
+  if (!teamStanding) {
+    return null;
+  }
 
-      // Get match points
-      let points = null;
-      if (match.homeTeam.id === team.id) {
-        points = match.homeTeamPoints;
-        goals += match.homeTeamGoals;
-        goalsConceded += match.awayTeamGoals;
-        cleanSheets += (match.awayTeamGoals === 0) ? 1 : 0;
-      } else {
-        points = match.awayTeamPoints;
-        goals += match.awayTeamGoals;
-        goalsConceded += match.homeTeamGoals;
-        cleanSheets += (match.homeTeamGoals === 0) ? 1 : 0;
-      }
+  const matchesPlayed = teamStanding.overall.played;
+  const wins = teamStanding.overall.won;
+  const losses = teamStanding.overall.lost;
+  const goals = teamStanding.overall.goalsScored;
+  const goalsConceded = teamStanding.overall.goalsConceded;
 
-      // Calculate win/loss statistics base on match points
-      if (points === POINTS_FOR_WINNING) {
-        wins += 1;
-      } else if (points === POINTS_FOR_LOSING) {
-        losses += 1;
-      }
+  // tslint:disable:align
+  const cleanSheets = teamStanding.playedMatches.reduce((sum: number, match: Match): number => {
+    if (match.homeTeam.id === team.id) {
+      sum += (match.awayTeamGoals === 0) ? 1 : 0;
+    } else {
+      sum += (match.homeTeamGoals === 0) ? 1 : 0;
     }
-  });
+    return sum;
+  }, 0);
 
   const teamStats: TeamStat[] = [
     { name: 'Matches Played', result: matchesPlayed },
