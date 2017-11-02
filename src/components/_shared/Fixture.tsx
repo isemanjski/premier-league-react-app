@@ -3,11 +3,14 @@ import { Link } from 'react-router';
 import { Match } from '../../api/models';
 import { Emblem } from './Emblem';
 
-export interface Props {
+interface Props {
   match: Match;
   size?: 'small';
 }
 
+/**
+ * Component which renders match between two teams and their goals.
+ */
 export const Fixture: React.StatelessComponent<Props> = (props: Props) => {
   const { match, size } = props;
 

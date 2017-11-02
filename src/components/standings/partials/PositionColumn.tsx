@@ -12,21 +12,27 @@ const MOVEMENT_UP = 'up';
 const MOVEMENT_DOWN = 'down';
 const MOVEMENT_NONE = 'none';
 
+/**
+ * Component which renders team position in table with movement icon which represents how team position was changed
+ * depending on previous position (from previous round).
+ */
 export const PositionColumn: React.StatelessComponent<Props> = (props: Props) => {
   const { standing, standingType } = props;
-  const currentPosition = standing[standingType].position;
+  const currPosition = standing[standingType].position;
   const prevPosition = standing[standingType].prevPosition;
 
-  const getMovementFromPosition = (curPos: number, lastPos: number): string => {
-    if (curPos > lastPos) {
+  // Get movement string from provided information about current and previous position.
+  // If previous position was lower on table than current, that means that team has advanced by moving up.
+  const getMovementFromPosition = (currentPosition: number, previousPosition: number): string => {
+    if (currentPosition > previousPosition) {
       return MOVEMENT_DOWN;
-    } else if (curPos < lastPos) {
+    } else if (currentPosition < previousPosition) {
       return MOVEMENT_UP;
     }
     return MOVEMENT_NONE;
   };
 
-  const movementDirection = getMovementFromPosition(currentPosition, prevPosition);
+  const movementDirection = getMovementFromPosition(currPosition, prevPosition);
   const movementClasses = `pl-position-movement ${movementDirection}`;
 
   const popupStyle = {
@@ -36,7 +42,7 @@ export const PositionColumn: React.StatelessComponent<Props> = (props: Props) =>
 
   return (
     <div className="pl-position-container">
-      <span className="pl-position">{currentPosition}</span>
+      <span className="pl-position">{currPosition}</span>
       <Popup
         trigger={<span className={movementClasses}/>}
         position="right center"

@@ -2,6 +2,9 @@
 import { Standing } from './standing.model';
 import { isNotNil } from '../../utils/helpers';
 
+/**
+ * Model class that holds list of standings for one round.
+ */
 export class RoundStandings {
   round: number;
   standings: Standing[];

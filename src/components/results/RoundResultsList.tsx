@@ -9,6 +9,9 @@ export interface Props {
   selectedTeamId: string;
 }
 
+/**
+ * Helper method to create one instance of {@link RoundResults} component with provided properties.
+ */
 export const createRoundResults = (round: RoundMatches, teamId: string) => {
   return (
     <div key={round.round} style={{ marginBottom: '20px' }}>
@@ -21,6 +24,9 @@ export const createRoundResults = (round: RoundMatches, teamId: string) => {
   );
 };
 
+/**
+ * Component which contains list of {@link RoundResults} components.
+ */
 export const RoundResultsList: React.StatelessComponent<Props> = (props: Props) => {
   const { matchesByRound, selectedRoundNumber, selectedTeamId } = props;
 

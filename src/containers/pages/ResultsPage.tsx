@@ -16,7 +16,7 @@ const mapStateToProps = (state: RootState) => ({
   teams: state.seasonState.season.teams
 });
 
-export interface Props {
+interface Props {
   matchesByRound: RoundMatches[];
   roundNumbers: number[];
   selectedRoundNumber: number;
@@ -24,11 +24,14 @@ export interface Props {
   handleRoundSelect: (round: number) => Function;
 }
 
-export interface State {
+interface State {
   selectedRoundNumber: number;
   selectedTeamId: string;
 }
 
+/**
+ * Container which renders match results table with filters.
+ */
 class ResultsPage extends React.Component<Props, State> {
 
   constructor(props: Props) {
@@ -84,4 +87,5 @@ class ResultsPage extends React.Component<Props, State> {
   }
 }
 
+// Connects a React component to a Redux store
 export default connect(mapStateToProps)(ResultsPage);

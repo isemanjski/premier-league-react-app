@@ -3,6 +3,9 @@ import { Team } from './team.model';
 import { StandingByType } from './statistics.model';
 import { Match } from './match.model';
 
+/**
+ * Model class representing staining/statistics for each team throughout season.
+ */
 export class Standing {
   team: Team;
   overall: StandingByType;

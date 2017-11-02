@@ -7,6 +7,9 @@ interface Props {
   team: Team;
 }
 
+/**
+ * Component which renders team with its emblem and clickable name (which points to team's own profile page).
+ */
 export const TeamColumn: React.StatelessComponent<Props> = (props: Props) => {
   const { team } = props;
 

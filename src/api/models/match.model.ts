@@ -2,6 +2,9 @@
 import { isNotNil } from '../../utils/helpers';
 import { Team } from './team.model';
 
+/**
+ * Model class that represents match between two teams.
+ */
 export class Match {
   homeTeam: Team;
   homeTeamGoals: number;

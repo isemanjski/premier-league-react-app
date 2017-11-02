@@ -21,6 +21,10 @@ const FORM_WIN = 'W';
 const FORM_LOSS = 'L';
 const FORM_DRAW = 'D';
 
+/**
+ * Component which renders series of "badges" from N last matches representing team form/trending.
+ * Each matches' outcome is represented with own "badge" - W for winning, L for losing or D for draw.
+ */
 export const TeamForm: React.StatelessComponent<Props> = (props: Props) => {
   const { standing, standingType } = props;
 
@@ -81,8 +85,7 @@ export const TeamForm: React.StatelessComponent<Props> = (props: Props) => {
             <Fixture match={teamForm.match} size={'small'}/>
           </Popup.Content>
         </Popup>
-      ))
-      }
+      ))}
     </div>
   );
 };

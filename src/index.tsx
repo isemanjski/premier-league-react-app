@@ -21,7 +21,7 @@ import './assets/styles/main.css';
 const history = syncHistoryWithStore(browserHistory, store);
 
 // tslint:disable:align
-// Fix for problem of not scrolling to top of page when changing route
+// Fix for problem of not scrolling to top of page when changing route.
 // @see: https://github.com/ReactTraining/react-router/issues/2019
 const scrollTop = () => setTimeout(function () {
   window.scrollTo(0, 0);

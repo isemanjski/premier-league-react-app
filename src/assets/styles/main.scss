@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+// --------------------------------------------------------------------------------------------------------
+// This file should be the only Sass file from the whole code base not to begin with an underscore.
+// This file should not contain anything but @import and comments.
+// --------------------------------------------------------------------------------------------------------
+
 // Configuration and helpers
 @import "abstracts/variables";
 
@@ -22,6 +27,3 @@
 // Page-specific styles
 @import "pages/not-found-page";
 @import "pages/team-page";
-
-// Themes
-

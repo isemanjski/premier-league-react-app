@@ -1,10 +1,15 @@
 import * as React from 'react';
 import { Container, Header, Image } from 'semantic-ui-react';
 
+import logo from '../../assets/images/logo_head_darker.png';
+
 export interface Props {
   text: string;
 }
 
+/**
+ * Component which represents "404 Not Found" page.
+ */
 export const NotFoundPage: React.StatelessComponent<Props> = (props: Props) => {
   let { text } = props;
 
@@ -17,7 +22,7 @@ export const NotFoundPage: React.StatelessComponent<Props> = (props: Props) => {
       <Container>
         <div>
           <Image
-            src={process.env.PUBLIC_URL + '/assets/logo_head_darker.png'}
+            src={logo}
             alt={'Not Found'}
             height={250}
           />

@@ -2,6 +2,9 @@
 import { isNotNil } from '../../utils/helpers';
 import { Match } from './match.model';
 
+/**
+ * Model class that holds list of matches for one round.
+ */
 export class RoundMatches {
   round: number;
   matches: Match[];

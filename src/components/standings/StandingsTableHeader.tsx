@@ -8,6 +8,10 @@ interface Props {
   children?: React.ReactNode;
 }
 
+/**
+ * Component which renders table header - used to better handle responsive behaviour of table - showing/hiding
+ * columns at certain breakpoints.
+ */
 export const StandingsTableHeader: React.StatelessComponent<Props> = (props: Props) => {
   const { fullText, shortText, className, children } = props;
 

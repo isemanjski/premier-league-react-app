@@ -19,6 +19,9 @@ const ALL_ROUNDS_KEY = -1;
 const ALL_ROUNDS_NAME = 'All Rounds';
 const ALL_ROUNDS_VALUE = SELECT_ALL_ROUNDS;
 
+/**
+ * Component which renders dropdown for selecting season's rounds/match weeks.
+ */
 export class RoundSelector extends React.Component<Props, State> {
 
   constructor(props: Props) {

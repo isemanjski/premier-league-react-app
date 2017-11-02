@@ -16,13 +16,16 @@ const mapStateToProps = (state: RootState) => ({
   teams: state.seasonState.season.teams
 });
 
-export interface Props {
+interface Props {
   matchesByRound: RoundMatches[];
   standingsByRound: RoundStandings[];
   teams: Team[];
   params: Params;
 }
 
+/**
+ * Container which renders team page.
+ */
 class TeamPage extends React.Component<Props> {
 
   render() {
@@ -53,4 +56,5 @@ class TeamPage extends React.Component<Props> {
   }
 }
 
+// Connects a React component to a Redux store
 export default connect(mapStateToProps)(TeamPage);

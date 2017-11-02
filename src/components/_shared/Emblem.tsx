@@ -2,11 +2,14 @@ import * as React from 'react';
 import { Image } from 'semantic-ui-react';
 import { Team } from '../../api/models';
 
-export interface Props {
+interface Props {
   team: Team;
   size?: 'mini' | 'normal' | 'large';
 }
 
+/**
+ * Components which renders team emblem from SVG sprite image.
+ */
 export const Emblem: React.StatelessComponent<Props> = (props: Props) => {
   const { team, size } = props;
 

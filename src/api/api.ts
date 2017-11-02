@@ -1,5 +1,8 @@
 import { actionCreators as actions } from '../store/season';
 
+/**
+ * URL to server which holds data.json file.
+ */
 export const SERVER_BASE_URL = process.env.PUBLIC_URL + '/assets';
 
 /**
@@ -28,7 +31,7 @@ export function parseJSON(response: Response): Promise<{}> {
 }
 
 /**
- * Fetches season data from server.
+ * Fetches data from server.
  *
  * @returns {(dispatch: Function) => Promise<any>} A function that accepts `dispatch` so it can be
  *                                   called asynchronously.
@@ -47,11 +50,11 @@ export const fetchSeasonDataFromServer = () => {
 };
 
 /**
- * Fetches season data.
+ * Api call which fetches data for one football season.
  *
- * Its actually an action creator which returns a function instead of an action.
+ * Its actually an Redux action creator which returns a function instead of an action.
  *
- * @returns {(dispatch: Function) => Promise<any} A function that accepts `dispatch` so it can be called asynchronously
+ * @returns {(dispatch: Function) => Promise<any} A function that accepts `dispatch` so it can be called asynchronously.
  */
 export function fetchSeasonData() {
   return fetchSeasonDataFromServer();

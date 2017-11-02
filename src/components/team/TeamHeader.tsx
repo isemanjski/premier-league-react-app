@@ -7,6 +7,9 @@ export interface Props {
   matchesByRound: RoundMatches[];
 }
 
+/**
+ * Component which displays team emblem and name - used on team page.
+ */
 export const TeamHeader: React.StatelessComponent<Props> = (props: Props) => {
   const { team } = props;
 

@@ -12,6 +12,9 @@ interface State {
   selectOptions: any[];
 }
 
+/**
+ * Component which renders dropdown for selecting football season.
+ */
 export class SeasonSelector extends React.Component<Props, State> {
 
   constructor(props: Props) {

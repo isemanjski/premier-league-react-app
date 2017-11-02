@@ -11,6 +11,9 @@ interface TeamStat {
   result: number;
 }
 
+/**
+ * Component which displays some statistical data for selected team in form of small table.
+ */
 export const TeamTopStats: React.StatelessComponent<Props> = (props: Props) => {
   const { team, standingsByRound } = props;
 
@@ -28,6 +31,7 @@ export const TeamTopStats: React.StatelessComponent<Props> = (props: Props) => {
   const goalsConceded = teamStanding.overall.goalsConceded;
 
   // tslint:disable:align
+  // Calculate statistics in which team hasn't received any goal from its opponent
   const cleanSheets = teamStanding.playedMatches.reduce((sum: number, match: Match): number => {
     if (match.homeTeam.id === team.id) {
       sum += (match.awayTeamGoals === 0) ? 1 : 0;

@@ -2,6 +2,9 @@ import * as React from 'react';
 import { Container, Menu } from 'semantic-ui-react';
 import { Link } from 'react-router';
 
+/**
+ * Navigation component which uses links to route between pages.
+ */
 export const Navigation: React.StatelessComponent = () => {
   return (
     <div className="pl-navigation">

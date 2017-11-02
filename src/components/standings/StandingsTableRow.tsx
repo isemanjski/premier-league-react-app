@@ -10,6 +10,9 @@ interface Props {
   standingType: StandingType;
 }
 
+/**
+ * Component which displays statistical data of one team in a form of table row.
+ */
 export const StandingsTableRow: React.StatelessComponent<Props> = (props: Props) => {
   const { standing, standingType } = props;
   const stat = standing[standingType] as StandingByType;

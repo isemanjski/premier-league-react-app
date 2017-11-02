@@ -9,6 +9,9 @@ interface Props {
   standingType: StandingType;
 }
 
+/**
+ * Component which renders standings table with information about team's position, points, goals, etc.
+ */
 export const StandingsTable: React.StatelessComponent<Props> = (props: Props) => {
   const { standings, standingType } = props;
 

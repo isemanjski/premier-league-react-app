@@ -33,6 +33,10 @@ interface Props {
   children?: React.ReactNode;
 }
 
+/**
+ * Container which represents main layout of this application. It renders header, navigation and container where
+ * all other pages are displayed.
+ */
 class MainLayout extends React.Component<Props> {
 
   componentDidMount() {
@@ -79,4 +83,5 @@ class MainLayout extends React.Component<Props> {
   }
 }
 
+// Coneects a React component to a Redux store
 export default connect(mapStateToProps, mapDispatchToProps)(MainLayout);

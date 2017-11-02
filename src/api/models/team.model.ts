@@ -1,4 +1,8 @@
 // tslint:disable:no-any
+
+/**
+ * Model class which holds information about team.
+ */
 export class Team {
   id: string;
   name: string;

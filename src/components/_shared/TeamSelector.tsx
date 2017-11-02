@@ -19,6 +19,9 @@ const ALL_TEAMS_KEY = 'all-teams';
 const ALL_TEAMS_NAME = 'All Teams';
 const ALL_TEAMS_VALUE = SELECT_ALL_TEAMS;
 
+/**
+ * Component which renders dropdown for selecting team.
+ */
 export class TeamSelector extends React.Component<Props, State> {
 
   constructor(props: Props) {
@@ -49,7 +52,6 @@ export class TeamSelector extends React.Component<Props, State> {
   }
 
   render() {
-    // Preselect all teams by default
     return (
       <Form.Select
         label="Filter by Team"

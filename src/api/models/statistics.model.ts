@@ -1,6 +1,9 @@
 // tslint:disable:no-any
 import { isNotNil } from '../../utils/helpers';
 
+/**
+ * Model class representing statistics for team based on {@link StandingType}.
+ */
 export class StandingByType {
   position: number;
   prevPosition: number;

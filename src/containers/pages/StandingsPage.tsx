@@ -28,6 +28,9 @@ export interface State {
   selectedStandingType: StandingType;
 }
 
+/**
+ * Container which renders standings table with filters.
+ */
 class StandingsPage extends React.Component<Props, State> {
 
   constructor(props: Props) {
@@ -91,4 +94,5 @@ class StandingsPage extends React.Component<Props, State> {
 
 }
 
+// Connects a React component to a Redux store
 export default connect(mapStateToProps)(StandingsPage);

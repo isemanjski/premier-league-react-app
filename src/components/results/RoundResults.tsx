@@ -4,12 +4,16 @@ import { Fixture } from '../_shared/Fixture';
 import { SELECT_ALL_TEAMS } from '../../utils/constants';
 import { Divider } from 'semantic-ui-react';
 
-export interface Props {
+interface Props {
   matches: Match[];
   selectedRoundNumber: number;
   selectedTeamId: string;
 }
 
+/**
+ * Component which renders matches in selected round. Can be filtered to show only match in which selected team
+ * participated.
+ */
 export const RoundResults: React.StatelessComponent<Props> = (props: Props) => {
   const { matches, selectedRoundNumber, selectedTeamId } = props;
 

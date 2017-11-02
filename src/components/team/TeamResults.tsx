@@ -8,6 +8,9 @@ export interface Props {
   matchesByRound: RoundMatches[];
 }
 
+/**
+ * Component which renders match results filtered by selected team.
+ */
 export const TeamResults: React.StatelessComponent<Props> = (props: Props) => {
   const { team, matchesByRound } = props;
 
