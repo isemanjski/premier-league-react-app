@@ -6,7 +6,7 @@ import { RootState } from '../../store/root-reducer';
 import { RoundSelector } from '../../components/_shared/RoundSelector';
 import { SeasonSelector } from '../../components/_shared/SeasonSelector';
 import { TeamSelector } from '../../components/_shared/TeamSelector';
-import { SELECT_ALL_ROUNDS, SELECT_ALL_TEAMS } from '../../utils/constants';
+import { SELECT_ALL_TEAMS } from '../../utils/constants';
 import { RoundResultsList } from '../../components/results/RoundResultsList';
 
 const mapStateToProps = (state: RootState) => ({
@@ -37,8 +37,11 @@ class ResultsPage extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
+    // Select last round by default
+    const lastRoundNumber = props.matchesByRound[props.matchesByRound.length - 1].round;
+
     this.state = {
-      selectedRoundNumber: SELECT_ALL_ROUNDS,
+      selectedRoundNumber: lastRoundNumber,
       selectedTeamId: SELECT_ALL_TEAMS
     };
   }
