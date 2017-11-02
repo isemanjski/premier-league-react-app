@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router';
 import { Match } from '../../api/models';
 import { Emblem } from './Emblem';
 
@@ -16,7 +17,9 @@ export const Fixture: React.StatelessComponent<Props> = (props: Props) => {
     <div className={classNames}>
       <span className="pl-fixture__teams">
         <span className="pl-fixture__team pl-fixture__team--left">
-          <span className="pl-fixture__team-name">{match.homeTeam.name}</span>
+          <span className="pl-fixture__team-name">
+            <Link to={`/teams/${match.homeTeam.id}`} className="team-name">{match.homeTeam.name}</Link>
+          </span>
           <span className="pl-fixture__team-emblem"><Emblem team={match.homeTeam} size="normal"/></span>
         </span>
         <span className="pl-fixture__score">
@@ -24,7 +27,9 @@ export const Fixture: React.StatelessComponent<Props> = (props: Props) => {
         </span>
         <span className="pl-fixture__team pl-fixture__team--right">
           <span className="pl-fixture__team-emblem"><Emblem team={match.awayTeam} size="normal"/></span>
-          <span className="pl-fixture__team-name">{match.awayTeam.name}</span>
+          <span className="pl-fixture__team-name">
+            <Link to={`/teams/${match.awayTeam.id}`} className="team-name">{match.awayTeam.name}</Link>
+          </span>
         </span>
       </span>
     </div>

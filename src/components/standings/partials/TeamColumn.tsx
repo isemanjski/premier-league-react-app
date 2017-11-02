@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router';
 import { Emblem } from '../../_shared/Emblem';
 import { Team } from '../../../api/models';
 
@@ -12,7 +13,7 @@ export const TeamColumn: React.StatelessComponent<Props> = (props: Props) => {
   return (
     <div className="pl-standings-emblem">
       <Emblem team={team} size="mini"/>
-      <span>{team.name}</span>
+      <Link to={`/teams/${team.id}`} className="team-name">{team.name}</Link>
     </div>
   );
 };

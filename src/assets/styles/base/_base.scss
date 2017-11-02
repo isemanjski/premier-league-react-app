@@ -23,3 +23,11 @@ abbr[title] {
   color: white;
   background: $selection-color; /* Gecko Browsers */
 }
+
+a.team-name {
+  color: #333;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

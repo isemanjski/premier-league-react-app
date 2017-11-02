@@ -18,14 +18,21 @@ import './assets/styles/main.css';
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);
 
+// tslint:disable:align
+// Fix for problem of not scrolling to top of page when changing route
+// @see: https://github.com/ReactTraining/react-router/issues/2019
+const scrollTop = () => setTimeout(function () {
+  window.scrollTo(0, 0);
+}, 100);
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={MainLayout}>
         <IndexRoute component={StandingsPage}/>
-        <Route path="standings" component={StandingsPage}/>
-        <Route path="results" component={ResultsPage}/>
-        <Route path="teams/:teamId" component={TeamPage}/>
+        <Route path="standings" component={StandingsPage} onEnter={scrollTop}/>
+        <Route path="results" component={ResultsPage} onEnter={scrollTop}/>
+        <Route path="teams/:teamId" component={TeamPage} onEnter={scrollTop}/>
       </Route>
     </Router>
   </Provider>,
