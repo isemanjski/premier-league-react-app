@@ -3,7 +3,7 @@ import configureMockStore from 'redux-mock-store';
 import thunkMiddleware from 'redux-thunk';
 import * as fetchMock from 'fetch-mock';
 import * as types from '../store/season/season-actions';
-import { checkResponse, fetchSeasonDataFromFile, fetchSeasonDataFromServer, parseJSON, SERVER_BASE_URL } from './api';
+import { checkResponse, fetchSeasonDataFromServer, parseJSON, SERVER_BASE_URL } from './api';
 
 const mockStore = configureMockStore([thunkMiddleware]);
 
@@ -64,22 +64,3 @@ describe('fetchSeasonDataFromServer', () => {
   });
 });
 
-describe('fetchSeasonDataFromFile', () => {
-  afterEach(() => {
-    fetchMock.reset();
-    fetchMock.restore();
-  });
-
-  it('creates LOAD_SEASON_DATA_SUCCESS when fetching data has been done', () => {
-    const expectedActions = [
-      { type: types.LOAD_SEASON_DATA_START },
-      { type: types.LOAD_SEASON_DATA_SUCCESS, payload: data }
-    ];
-
-    const store = mockStore({ season: {} });
-
-    store.dispatch(fetchSeasonDataFromFile()).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-    });
-  });
-});

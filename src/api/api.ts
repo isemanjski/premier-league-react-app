@@ -1,7 +1,6 @@
-import { getRandomInt } from '../utils/helpers';
 import { actionCreators as actions } from '../store/season';
 
-export const SERVER_BASE_URL = 'https://s3.eu-central-1.amazonaws.com/js-assignment';
+export const SERVER_BASE_URL = process.env.PUBLIC_URL + '/assets';
 
 /**
  * Check validity of received response status.
@@ -48,36 +47,6 @@ export const fetchSeasonDataFromServer = () => {
 };
 
 /**
- * Simulates fetching data from server by using setTimeout.
- * Produces error in with probability of 0.1.
- *
- * @returns {(dispatch: Function) => Promise<any>} A function that accepts `dispatch` so it can be
- *                                   called asynchronously.
- */
-export const fetchSeasonDataFromFile = () => {
-  // tslint:disable-next-line:no-any
-  return (dispatch: Function): Promise<any> => {
-    const dataFromFile = require('./fixture/data.json');
-    const randomDelayInSeconds = getRandomInt(1, 5);
-    const randomError = getRandomInt(0, 100) < 10;
-
-    dispatch(actions.loadSeasonDataStart());
-
-    const delay = (delayMillis: number) => new Promise(resolve =>
-      setTimeout(resolve, delayMillis)
-    );
-
-    return delay(randomDelayInSeconds * 1000).then(() => {
-      if (randomError) {
-        return dispatch(actions.loadSeasonDataError('Error loading season data'));
-      } else {
-        return dispatch(actions.loadSeasonDataSuccess(dataFromFile));
-      }
-    });
-  };
-};
-
-/**
  * Fetches season data.
  *
  * Its actually an action creator which returns a function instead of an action.
@@ -85,9 +54,5 @@ export const fetchSeasonDataFromFile = () => {
  * @returns {(dispatch: Function) => Promise<any} A function that accepts `dispatch` so it can be called asynchronously
  */
 export function fetchSeasonData() {
-  if (process.env.NODE_ENV === 'production') {
-    return fetchSeasonDataFromServer();
-  } else {
-    return fetchSeasonDataFromFile();
-  }
+  return fetchSeasonDataFromServer();
 }
