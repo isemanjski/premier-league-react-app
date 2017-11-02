@@ -13,9 +13,6 @@ export const Navigation: React.StatelessComponent = () => {
           <Menu.Item as={Link} to={'/results'} activeClassName="active" className="pl-menu-item">
             <span>Results</span>
           </Menu.Item>
-          <Menu.Item as={Link} to={'/stats'} activeClassName="active" className="pl-menu-item">
-            <span>Stats</span>
-          </Menu.Item>
         </Menu>
       </Container>
     </div>

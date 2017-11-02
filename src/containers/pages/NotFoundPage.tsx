@@ -6,7 +6,11 @@ export interface Props {
 }
 
 export const NotFoundPage: React.StatelessComponent<Props> = (props: Props) => {
-  const { text } = props;
+  let { text } = props;
+
+  if (!text) {
+    text = '404 Not Found';
+  }
 
   return (
     <div className="pl-not-found-page">

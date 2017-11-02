@@ -14,6 +14,7 @@ import TeamPage from './containers/pages/TeamPage';
 import 'semantic-ui-css/semantic.min.css';
 // Import own styles
 import './assets/styles/main.css';
+import { NotFoundPage } from './containers/pages/NotFoundPage';
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);
@@ -33,6 +34,7 @@ ReactDOM.render(
         <Route path="standings" component={StandingsPage} onEnter={scrollTop}/>
         <Route path="results" component={ResultsPage} onEnter={scrollTop}/>
         <Route path="teams/:teamId" component={TeamPage} onEnter={scrollTop}/>
+        <Route path="*" component={NotFoundPage} onEnter={scrollTop}/>
       </Route>
     </Router>
   </Provider>,
