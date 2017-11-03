@@ -29,7 +29,7 @@ export const Emblem: React.StatelessComponent<Props> = (props: Props) => {
   return (
     <Image
       src={process.env.PUBLIC_URL + '/assets/team-sprites.svg#' + team.id}
-      alt={team.name}
+      alt=""
       height={height}
       verticalAlign="middle"
     />
