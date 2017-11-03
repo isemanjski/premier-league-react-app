@@ -3,6 +3,7 @@ import { Standing } from '../../api/models';
 import { StandingType } from '../../utils/standing-type.enum';
 import { StandingsTableRow } from './StandingsTableRow';
 import { StandingsTableHeader } from './StandingsTableHeader';
+import { positionSorter } from '../../api/mappings/season-model-mapper';
 
 interface Props {
   standings: Standing[];
@@ -15,10 +16,7 @@ interface Props {
 export const StandingsTable: React.StatelessComponent<Props> = (props: Props) => {
   const { standings, standingType } = props;
 
-  // Sort standings array by number of points descending depending on selected standings type (overall, home or away)
-  const sortedStandings = standings.slice().sort((s1: Standing, s2: Standing) => {
-    return (s2[standingType].points - s1[standingType].points);
-  });
+  const sortedStandings = standings.slice().sort(positionSorter(standingType));
 
   const tableRows = sortedStandings.map(standing => (
     <StandingsTableRow key={standing[standingType].position} standing={standing} standingType={standingType}/>

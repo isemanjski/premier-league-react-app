@@ -24,10 +24,12 @@ export const PositionColumn: React.StatelessComponent<Props> = (props: Props) =>
   // Get movement string from provided information about current and previous position.
   // If previous position was lower on table than current, that means that team has advanced by moving up.
   const getMovementFromPosition = (currentPosition: number, previousPosition: number): string => {
-    if (currentPosition > previousPosition) {
-      return MOVEMENT_DOWN;
-    } else if (currentPosition < previousPosition) {
-      return MOVEMENT_UP;
+    if (previousPosition !== null) {
+      if (currentPosition > previousPosition) {
+        return MOVEMENT_DOWN;
+      } else if (currentPosition < previousPosition) {
+        return MOVEMENT_UP;
+      }
     }
     return MOVEMENT_NONE;
   };
@@ -43,7 +45,8 @@ export const PositionColumn: React.StatelessComponent<Props> = (props: Props) =>
   return (
     <div className="pl-position-container">
       <span className="pl-position">{currPosition}</span>
-      <Popup
+      {prevPosition === null && <span className={movementClasses}/>}
+      {prevPosition !== null && <Popup
         trigger={<span className={movementClasses}/>}
         position="right center"
         style={popupStyle}
@@ -51,7 +54,7 @@ export const PositionColumn: React.StatelessComponent<Props> = (props: Props) =>
         <Popup.Content>
           Last position: <strong>{prevPosition}</strong>
         </Popup.Content>
-      </Popup>
+      </Popup>}
     </div>
   );
 };

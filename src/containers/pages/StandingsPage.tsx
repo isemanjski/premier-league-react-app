@@ -36,8 +36,11 @@ class StandingsPage extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
+    // Select last round by default
+    const lastRoundNumber = props.standingsByRound[props.standingsByRound.length - 1].round;
+
     this.state = {
-      selectedRoundNumber: SELECT_ALL_ROUNDS,
+      selectedRoundNumber: lastRoundNumber,
       selectedStandingType: StandingType.Overall
     };
   }
