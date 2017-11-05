@@ -23,7 +23,7 @@ export const Emblem: React.StatelessComponent<Props> = (props: Props) => {
       height = 90;
       break;
     default:
-      height = 55;
+      height = 50;
   }
 
   return (

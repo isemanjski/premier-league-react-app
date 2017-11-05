@@ -2,41 +2,62 @@
 // This file contains all styles related to fixture component.
 // -----------------------------------------------------------------------------
 
+@import "../abstracts/variables";
+
 .pl-fixture {
   padding: 5px 0;
+  display: table;
+  width: 100%;
+  table-layout: fixed;
 
   &__teams {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: table-row;
+  }
+
+  &__team-container {
+    display: table-cell;
+    vertical-align: middle;
   }
 
   &__team {
     font-weight: 400;
     font-size: 18px;
-    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
-    flex: 1 1 100%;
+    display: flex;
+    align-items: center;
 
     &--left {
       text-align: right;
     }
   }
 
+  &__team-emblem img {
+    margin: -5px 0;
+  }
+
+  &__team-name {
+    width: 100%;
+  }
+
+  &__score-container {
+    display: table-cell;
+    vertical-align: middle;
+    height: 30px;
+    margin: 0;
+    width: 60px;
+    padding: 4px 0;
+    text-align: center;
+  }
+
   &__score {
+    display: inline-block;
+    width: 100%;
     margin: 0;
     background: #38003c;
-    font-size: 15px;
+    font-size: 14px;
     color: #fff;
-    width: 60px;
-    display: inline-block;
-    padding: 4px 2px;
-    text-align: center;
-    height: 30px;
-    line-height: 22px;
+    line-height: 30px;
     border-radius: 3px;
-    flex: 0 0 60px;
   }
 
   &__score-dash {
@@ -61,8 +82,44 @@
     margin: 0;
     width: 50px;
     height: 25px;
-    line-height: 18px;
+    line-height: 25px;
     font-size: 13px;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    &__score-container {
+      width: 55px;
+    }
+
+    &__score {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: $screen-xs) {
+    &__team {
+      font-size: 14px;
+    }
+
+    &__team--left {
+      padding-right: 16px;
+    }
+
+    &__team--right {
+      padding-left: 16px;
+    }
+
+    &__team-emblem {
+      display: none;
+    }
+
+    &__score-container {
+      width: 55px;
+    }
+
+    &__score {
+      font-size: 14px;
+    }
   }
 
 }

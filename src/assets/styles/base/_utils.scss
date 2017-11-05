@@ -2,6 +2,8 @@
 // This file contains CSS helper classes.
 // -----------------------------------------------------------------------------
 
+@import "../abstracts/variables";
+
 .p-0 {
   padding: 0 !important;
 }
@@ -30,7 +32,7 @@
   display: block !important;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: $screen-xs-max) {
   .d-sm-none {
     display: none !important;
   }
@@ -40,7 +42,7 @@
   }
 }
 
-@media only screen and (max-width: 991px) {
+@media only screen and (max-width: $screen-sm-max) {
   .d-md-none {
     display: none !important;
   }

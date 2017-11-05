@@ -18,23 +18,29 @@ export const Fixture: React.StatelessComponent<Props> = (props: Props) => {
 
   return (
     <div className={classNames}>
-      <span className="pl-fixture__teams">
-        <span className="pl-fixture__team pl-fixture__team--left">
-          <span className="pl-fixture__team-name">
-            <Link to={`/teams/${match.homeTeam.id}`} className="team-name">{match.homeTeam.name}</Link>
-          </span>
-          <span className="pl-fixture__team-emblem"><Emblem team={match.homeTeam} size="normal"/></span>
-        </span>
-        <span className="pl-fixture__score">
-          {match.homeTeamGoals}<span className="pl-fixture__score-dash">-</span>{match.awayTeamGoals}
-        </span>
-        <span className="pl-fixture__team pl-fixture__team--right">
-          <span className="pl-fixture__team-emblem"><Emblem team={match.awayTeam} size="normal"/></span>
-          <span className="pl-fixture__team-name">
-            <Link to={`/teams/${match.awayTeam.id}`} className="team-name">{match.awayTeam.name}</Link>
-          </span>
-        </span>
-      </span>
+      <div className="pl-fixture__teams">
+        <div className="pl-fixture__team-container">
+          <div className="pl-fixture__team pl-fixture__team--left">
+            <div className="pl-fixture__team-name">
+              <Link to={`/teams/${match.homeTeam.id}`} className="team-name">{match.homeTeam.name}</Link>
+            </div>
+            <div className="pl-fixture__team-emblem"><Emblem team={match.homeTeam} size="normal"/></div>
+          </div>
+        </div>
+        <div className="pl-fixture__score-container">
+          <div className="pl-fixture__score">
+            {match.homeTeamGoals}<span className="pl-fixture__score-dash">-</span>{match.awayTeamGoals}
+          </div>
+        </div>
+        <div className="pl-fixture__team-container">
+          <div className="pl-fixture__team pl-fixture__team--right">
+            <div className="pl-fixture__team-emblem"><Emblem team={match.awayTeam} size="normal"/></div>
+            <div className="pl-fixture__team-name">
+              <Link to={`/teams/${match.awayTeam.id}`} className="team-name">{match.awayTeam.name}</Link>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

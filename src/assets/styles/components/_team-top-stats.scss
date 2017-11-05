@@ -23,6 +23,9 @@ $border-color: #e8e8e8;
 
     .stat-name {
       font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .stat-result {
@@ -38,7 +41,7 @@ $border-color: #e8e8e8;
     border-right: 1px solid $border-color;
   }
 
-  @media (max-width: 56.25em) {
+  @media (max-width: $screen-sm-max) {
     .stat-container {
       padding: 8px;
       display: block;
@@ -61,7 +64,7 @@ $border-color: #e8e8e8;
   }
 }
 
-@media (max-width: 56.25em) {
+@media (max-width: $screen-sm-max) {
   .pl-team-top-stats {
     border-bottom: 3px solid rgb(115, 16, 115);
   }
