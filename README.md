@@ -1,6 +1,6 @@
 ## Premier League - React App
 
-Simple application created using [React](http://facebook.github.io/react/) and [Redux](https://github.com/reactjs/react-redux) with [Typescript](https://www.typescriptlang.org/).
+Simple application created using [React](http://facebook.github.io/react/) and [Redux](https://redux.js.org/) with [Typescript](https://www.typescriptlang.org/).
  
 It displays results and tables from English **Premier League** from season 2016/2017.
  
@@ -26,6 +26,3 @@ Launches the test runner in the interactive watch mode.<br>
 
 Builds the app for production to the `build` folder.<br>
 It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
